@@ -1,15 +1,14 @@
 //��ȡ�޸ı���
 package com.fr.io;
 
-import com.fr.base.FRContext;
 import com.fr.base.Style;
-import com.fr.dav.LocalEnv;
 import com.fr.general.FRFont;
 import com.fr.general.ModuleContext;
 import com.fr.main.impl.WorkBook;
 import com.fr.report.cell.CellElement;
 import com.fr.report.elementcase.TemplateElementCase;
 import com.fr.report.module.EngineModule;
+import com.fr.workspace.simple.SimpleWork;
 
 import java.awt.Color;
 import java.io.File;
@@ -19,12 +18,12 @@ public class SimpleDemo {
     public static void main(String[] args) {
         // ���屨�����л���,����ִ�б���  
         String envPath = "D:\\FineReport_7.0\\WebReport\\WEB-INF";
-        FRContext.setCurrentEnv(new LocalEnv(envPath));
+        SimpleWork.checkIn(envPath);
         ModuleContext.startModule(EngineModule.class.getName());
         try {
             // ��ȡģ��  
             WorkBook workbook = (WorkBook) TemplateWorkBookIO
-                    .readTemplateWorkBook(FRContext.getCurrentEnv(),
+                    .readTemplateWorkBook(
                             "\\doc\\Primary\\Parameter\\Parameter.cpt");
 
             // ���WorkBook�е�WorkSheet�������޸�A1��Ԫ���ǰ��ɫΪ��ɫ  
@@ -44,6 +43,8 @@ public class SimpleDemo {
             ((WorkBook) workbook).export(outputStream);
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            SimpleWork.checkOut();
         }
     }
 }

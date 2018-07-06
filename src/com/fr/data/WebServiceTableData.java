@@ -10,7 +10,7 @@ public class WebServiceTableData extends AbstractTableData {
     private String[][] data;
 
     public WebServiceTableData() {
-        this.data = this.getData();
+        this.data = this.getWebServiceTableData();
     }
 
     //获取列数
@@ -41,7 +41,7 @@ public class WebServiceTableData extends AbstractTableData {
         return data[rowIndex + 1][columnIndex];
     }
 
-    public String[][] getData() {
+    public String[][] getWebServiceTableData() {
         try {
             String endpoint = "http://localhost:8080/axis/TestWS2TDClient.jws";
             Service service = new Service();

@@ -1,12 +1,15 @@
 package com.fr.data;
 
 import com.fr.base.FRContext;
-import com.fr.base.Parameter;
+import com.fr.config.holder.impl.xml.XmlColConf;
 import com.fr.function.ConnectSAPServer;
+import com.fr.stable.ParameterProvider;
 import com.sap.conn.jco.JCoDestination;
 import com.sap.conn.jco.JCoException;
 import com.sap.conn.jco.JCoFunction;
 import com.sap.conn.jco.JCoTable;
+
+import java.util.ArrayList;
 
 public class ParamSAPDataTest extends AbstractTableData {
     private String[] columnNames = null;
@@ -18,8 +21,12 @@ public class ParamSAPDataTest extends AbstractTableData {
     private static JCoDestination jCoDestination;
 
     public ParamSAPDataTest() {
-        this.parameters = new Parameter[]{new Parameter("LIFNR"),
-                new Parameter("NAME1")};
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add("LIFNR");
+        arrayList.add("NAME1");
+
+
+        this.parameters = new XmlColConf<>(arrayList, ParameterProvider.class);
 
         this.columnNames = new String[this.columnNum];
         this.columnNames[0] = "供应商编码";
@@ -69,8 +76,10 @@ public class ParamSAPDataTest extends AbstractTableData {
         if (function == null)
             throw new RuntimeException(
                     "Function not found in SAP.");
-        function.getImportParameterList().setValue("LIFNR", "%" + this.parameters[0].getValue().toString().toUpperCase().trim() + "%");
-        function.getImportParameterList().setValue("NAME1", "%" + this.parameters[1].getValue().toString().toUpperCase().trim() + "%");
+        function.getImportParameterList().setValue("LIFNR", "%" +
+                ((ParameterProvider) (parameters.get().toArray()[0])).getValue().toString().toUpperCase().trim() + "%");
+        function.getImportParameterList().setValue("NAME1", "%" + ((ParameterProvider) (parameters.get().toArray()[1]))
+                .getValue().toString().toUpperCase().trim() + "%");
         function.execute(jCoDestination);
         JCoTable returnTable = function.getTableParameterList().getTable(
                 "ZLFA1S3");

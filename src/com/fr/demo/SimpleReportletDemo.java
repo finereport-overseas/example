@@ -1,27 +1,29 @@
 //程序网络报表
 package com.fr.demo;
 
-import com.fr.base.Env;
-import com.fr.base.FRContext;
 import com.fr.io.TemplateWorkBookIO;
 import com.fr.main.TemplateWorkBook;
 import com.fr.web.core.Reportlet;
 import com.fr.web.request.ReportletRequest;
+import com.fr.workspace.simple.SimpleWork;
 
 import java.util.Map;
 
 
 public class SimpleReportletDemo extends Reportlet {
     public TemplateWorkBook createReport(ReportletRequest reportletrequest) {
+        String envPath = "D:\\FineReport_8.0\\WebReport\\WEB-INF";
+        SimpleWork.checkIn(envPath);
         // 新建一个WorkBook对象，用于保存最终返回的报表  
-        Env oldEnv = FRContext.getCurrentEnv();
         TemplateWorkBook WorkBook = null;
         try {
             // 读取模板，将模板保存为workbook对象并返回  
-            WorkBook = TemplateWorkBookIO.readTemplateWorkBook(oldEnv,
+            WorkBook = TemplateWorkBookIO.readTemplateWorkBook(
                     "\\doc\\Primary\\Parameter\\Parameter.cpt");
         } catch (Exception e) {
             e.getStackTrace();
+        } finally {
+            SimpleWork.checkOut();
         }
         return WorkBook;
     }

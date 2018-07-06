@@ -11,7 +11,7 @@ public class WebServiceWsdlTableDataDemo2 extends AbstractTableData {
     private String[][] data;
 
     public WebServiceWsdlTableDataDemo2() {
-        this.data = this.getData();
+        this.data = this.getWebServiceWsdlTableData();
     }
 
     public int getColumnCount() throws TableDataException {
@@ -33,7 +33,7 @@ public class WebServiceWsdlTableDataDemo2 extends AbstractTableData {
         return data[rowIndex + 1][columnIndex];
     }
 
-    public String[][] getData() {
+    public String[][] getWebServiceWsdlTableData() {
         try {
             String url = "http://www.webxml.com.cn/WebServices/MobileCodeWS.asmx?wsdl";
             MobileCodeWSStub stub = new MobileCodeWSStub(url);
@@ -55,8 +55,6 @@ public class WebServiceWsdlTableDataDemo2 extends AbstractTableData {
                 }
             }
             return result;
-        } catch (org.apache.axis2.AxisFault e) {
-            e.printStackTrace();
         } catch (java.rmi.RemoteException e) {
             e.printStackTrace();
         }
@@ -64,8 +62,8 @@ public class WebServiceWsdlTableDataDemo2 extends AbstractTableData {
     }
 
     public static void main(String[] args) {
-        for (int i = 0; i < new WebServiceWsdlTableDataDemo2().getData().length; i++) {
-            System.out.println(new WebServiceWsdlTableDataDemo2().getData()[i]);
+        for (int i = 0; i < new WebServiceWsdlTableDataDemo2().getWebServiceWsdlTableData().length; i++) {
+            System.out.println(new WebServiceWsdlTableDataDemo2().getWebServiceWsdlTableData()[i]);
         }
     }
 }

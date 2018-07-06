@@ -1,8 +1,6 @@
 //��̬�޸�����
 package com.fr.demo;
 
-import com.fr.base.Env;
-import com.fr.base.FRContext;
 import com.fr.data.ArrayTableDataDemo;
 import com.fr.general.ModuleContext;
 import com.fr.io.TemplateWorkBookIO;
@@ -16,11 +14,10 @@ import java.util.Map;
 public class NewDateDemo extends Reportlet {
     public TemplateWorkBook createReport(ReportletRequest reportletrequest) {
         TemplateWorkBook workbook = null;
-        Env oldEnv = FRContext.getCurrentEnv();
         ModuleContext.startModule(EngineModule.class.getName());
         try {
             // ����workbook���󣬽�ģ�屣��Ϊworkbook���󲢷���    
-            workbook = TemplateWorkBookIO.readTemplateWorkBook(oldEnv, "1.cpt");
+            workbook = TemplateWorkBookIO.readTemplateWorkBook("1.cpt");
             ArrayTableDataDemo a = new ArrayTableDataDemo(); // ���ö���ĳ������ݼ�����    
             workbook.putTableData("ds2", a); // ��ģ�帳�µ����ݼ�    
         } catch (Exception e) {

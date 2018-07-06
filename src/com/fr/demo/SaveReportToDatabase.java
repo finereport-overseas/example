@@ -1,7 +1,6 @@
 package com.fr.demo;
 
-import com.fr.base.FRContext;
-import com.fr.dav.LocalEnv;
+import com.fr.workspace.simple.SimpleWork;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,7 +18,7 @@ public class SaveReportToDatabase {
         try {
             // 定义报表运行环境,才能执行报表
             String envpath = "D:\\FineReport_8.0\\WebReport\\WEB-INF";
-            FRContext.setCurrentEnv(new LocalEnv(envpath));
+            SimpleWork.checkIn(envpath);
             // 连接数据库  
             String driver = "com.mysql.jdbc.Driver";
             String url = "jdbc:mysql://112.124.109.239:3306/yourdatabase";
@@ -44,6 +43,8 @@ public class SaveReportToDatabase {
             conn.close();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            SimpleWork.checkOut();
         }
     }
 }

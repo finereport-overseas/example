@@ -1,15 +1,14 @@
 // �����������API 
 package com.fr.io;
 
-import com.fr.base.FRContext;
 import com.fr.base.background.ColorBackground;
-import com.fr.dav.LocalEnv;
 import com.fr.general.Background;
 import com.fr.general.ModuleContext;
 import com.fr.io.exporter.EmbeddedTableDataExporter;
 import com.fr.main.impl.WorkBook;
 import com.fr.main.parameter.ReportParameterAttr;
 import com.fr.report.module.EngineModule;
+import com.fr.workspace.simple.SimpleWork;
 
 import java.awt.Color;
 import java.io.File;
@@ -20,11 +19,11 @@ public class SetParameterWindow {
         try {
             // ���屨�����л���,����ִ�б���  
             String envPath = "D:\\FineReport\\develop\\code\\build\\package\\WebReport\\WEB-INF";
-            FRContext.setCurrentEnv(new LocalEnv(envPath));
+            SimpleWork.checkIn(envPath);
             ModuleContext.startModule(EngineModule.class.getName());
             // ��ȡģ�屣��ΪWorkBook����  
             WorkBook workbook = (WorkBook) TemplateWorkBookIO
-                    .readTemplateWorkBook(FRContext.getCurrentEnv(),
+                    .readTemplateWorkBook(
                             "\\doc\\Primary\\Parameter\\Parameter.cpt");
             // ��ȡWorkBook�������Ĳ�������ReportParameterAttr  
             ReportParameterAttr paraAttr = workbook.getReportParameterAttr();
@@ -52,6 +51,8 @@ public class SetParameterWindow {
             templateExporter.export(outputStream, workbook);
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            SimpleWork.checkOut();
         }
     }
 }

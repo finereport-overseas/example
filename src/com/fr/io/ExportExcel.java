@@ -1,8 +1,6 @@
 package com.fr.io;
 
-import com.fr.base.FRContext;
 import com.fr.base.Parameter;
-import com.fr.dav.LocalEnv;
 import com.fr.general.ModuleContext;
 import com.fr.io.exporter.ExcelExporter;
 import com.fr.io.exporter.LargeDataPageExcelExporter;
@@ -16,6 +14,7 @@ import com.fr.main.workbook.ResultWorkBook;
 import com.fr.report.core.ReportUtils;
 import com.fr.report.module.EngineModule;
 import com.fr.stable.WriteActor;
+import com.fr.workspace.simple.SimpleWork;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -25,14 +24,13 @@ public class ExportExcel {
     public static void main(String[] args) {
         // 定义报表运行环境,才能执行报表  
         String envpath = "D:\\FineReport_8.0\\WebReport\\WEB-INF";
-        FRContext.setCurrentEnv(new LocalEnv(envpath));
+        SimpleWork.checkIn(envpath);
         ModuleContext.startModule(EngineModule.class.getName());
         ResultWorkBook rworkbook = null;
         try {
             // 未执行模板工作薄  
             WorkBook workbook = (WorkBook) TemplateWorkBookIO
-                    .readTemplateWorkBook(FRContext.getCurrentEnv(),
-                            "\\doc\\Primary\\Parameter\\Parameter.cpt");
+                    .readTemplateWorkBook("\\doc\\Primary\\Parameter\\Parameter.cpt");
             // 获取报表参数并设置值，导出内置数据集时数据集会根据参数值查询出结果从而转为内置数据集  
             Parameter[] parameters = workbook.getParameters();
             parameters[0].setValue("华东");

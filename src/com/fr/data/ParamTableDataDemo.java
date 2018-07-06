@@ -2,6 +2,7 @@ package com.fr.data;
 
 import com.fr.base.FRContext;
 import com.fr.file.DatasourceManager;
+import com.fr.stable.ParameterProvider;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -82,8 +83,7 @@ public class ParamTableDataDemo extends AbstractTableData {
             return;
         }
         // 保存得到的数据库表名
-        String tableName = parameters[0].getValue().toString();
-
+        String tableName = ((ParameterProvider) (parameters.get().toArray())[0]).getValue().toString();
 
         // 构造SQL语句,并打印出来
         String sql = "select * from " + tableName;

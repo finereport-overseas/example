@@ -1,15 +1,14 @@
 // 程序网络报表中获取request中的值 
 package com.fr.demo;
 
-import com.fr.base.FRContext;
 import com.fr.base.Parameter;
-import com.fr.dav.LocalEnv;
 import com.fr.general.ModuleContext;
 import com.fr.io.TemplateWorkBookIO;
 import com.fr.main.TemplateWorkBook;
 import com.fr.report.module.EngineModule;
 import com.fr.web.core.Reportlet;
 import com.fr.web.request.ReportletRequest;
+import com.fr.workspace.simple.SimpleWork;
 
 import java.util.Map;
 
@@ -18,14 +17,13 @@ public class URLParameterDemo extends Reportlet {
     public TemplateWorkBook createReport(ReportletRequest reportletRequest) {
 
         String envPath = "D:\\FineReport_8.0\\WebReport\\WEB-INF";
-        FRContext.setCurrentEnv(new LocalEnv(envPath));
+        SimpleWork.checkIn(envPath);
         ModuleContext.startModule(EngineModule.class.getName());
         // 获取外部传来的参数    
         TemplateWorkBook wbTpl = null;
         String countryValue = reportletRequest.getParameter("地区").toString();
         try {
-            wbTpl = TemplateWorkBookIO.readTemplateWorkBook(
-                    FRContext.getCurrentEnv(), "\\doc\\Primary\\Parameter\\Parameter.cpt");
+            wbTpl = TemplateWorkBookIO.readTemplateWorkBook("\\doc\\Primary\\Parameter\\Parameter.cpt");
             // 提取报表参数组，由于原模板只有country一个参数，因此直接取index为0的参数，并将外部传入的值赋给该参数    
             Parameter[] ps = wbTpl.getParameters();
             ps[0].setValue(countryValue);
@@ -34,7 +32,8 @@ public class URLParameterDemo extends Reportlet {
             wbTpl.getReportParameterAttr().setParameterUI(null);
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+        } finally {
+            SimpleWork.checkOut();
         }
         return wbTpl;
     }

@@ -1,7 +1,5 @@
 package com.fr.io;
 
-import com.fr.base.FRContext;
-import com.fr.dav.LocalEnv;
 import com.fr.general.ModuleContext;
 import com.fr.io.exporter.ExcelExporter;
 import com.fr.main.TemplateWorkBook;
@@ -9,6 +7,7 @@ import com.fr.main.workbook.ResultWorkBook;
 import com.fr.report.module.EngineModule;
 import com.fr.stable.StableUtils;
 import com.fr.stable.WriteActor;
+import com.fr.workspace.simple.SimpleWork;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -24,10 +23,10 @@ public class ExportBatch {
         try {
             // ���屨�����л���,����ִ�б���
             String envpath = "D:\\FineReport_7.1\\WebReport\\WEB-INF";
-            FRContext.setCurrentEnv(new LocalEnv(envpath));
+            SimpleWork.checkIn(envpath);
             ModuleContext.startModule(EngineModule.class.getName());
             // ��ȡ�����µ�ģ���ļ�
-            TemplateWorkBook workbook = TemplateWorkBookIO.readTemplateWorkBook(FRContext.getCurrentEnv(),
+            TemplateWorkBook workbook = TemplateWorkBookIO.readTemplateWorkBook(
                     "doc\\Primary\\DetailReport\\Details.cpt");
             // ��ȡ���ڱ���Ĳ���ֵ��txt�ļ�
             File parafile = new File(envpath + "\\para.txt");
@@ -65,6 +64,8 @@ public class ExportBatch {
             ModuleContext.stopModules();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            SimpleWork.checkOut();
         }
     }
 } 

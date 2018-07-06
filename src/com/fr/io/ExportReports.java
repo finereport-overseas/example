@@ -1,8 +1,6 @@
 package com.fr.io;
 
-import com.fr.base.FRContext;
 import com.fr.base.Parameter;
-import com.fr.dav.LocalEnv;
 import com.fr.general.ModuleContext;
 import com.fr.io.exporter.PageExcelExporter;
 import com.fr.main.TemplateWorkBook;
@@ -11,6 +9,7 @@ import com.fr.report.core.ReportUtils;
 import com.fr.report.module.EngineModule;
 import com.fr.report.report.PageReport;
 import com.fr.stable.PageActor;
+import com.fr.workspace.simple.SimpleWork;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -20,12 +19,12 @@ public class ExportReports {
     public static void main(String[] args) {
         // ���屨�����л���,����ִ�б���    
         String envpath = "D:\\FineReport\\develop\\code\\build\\package\\WebReport\\WEB-INF";
-        FRContext.setCurrentEnv(new LocalEnv(envpath));
+        SimpleWork.checkIn(envpath);
         ModuleContext.startModule(EngineModule.class.getName());
         // ���г����һЩ��Ҫ��ʼ��    
         try {
             // δִ��ģ�幤����    
-            TemplateWorkBook workbook = TemplateWorkBookIO.readTemplateWorkBook(FRContext.getCurrentEnv(),
+            TemplateWorkBook workbook = TemplateWorkBookIO.readTemplateWorkBook(
                     "Gettingstarted.cpt");
             // ����ֵΪChina�������������������rworkbook    
             Parameter[] parameters = workbook.getParameters();
@@ -52,6 +51,8 @@ public class ExportReports {
 
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            SimpleWork.checkOut();
         }
     }
 } 

@@ -1,11 +1,11 @@
 package com.fr.demo;
 
 import com.fr.base.FRContext;
-import com.fr.dav.LocalEnv;
 import com.fr.main.TemplateWorkBook;
 import com.fr.main.impl.WorkBook;
 import com.fr.web.core.Reportlet;
 import com.fr.web.request.ReportletRequest;
+import com.fr.workspace.simple.SimpleWork;
 
 import java.io.InputStream;
 import java.sql.Blob;
@@ -20,7 +20,7 @@ public class ReadFromDatabase extends Reportlet {
     public TemplateWorkBook createReport(ReportletRequest reportletRequest) {
         // 定义报表运行环境,才能执行报表
         String envpath = "D:\\FineReport_8.0\\WebReport\\WEB-INF";
-        FRContext.setCurrentEnv(new LocalEnv(envpath));
+        SimpleWork.checkIn(envpath);
 
         WorkBook workbook = new WorkBook();
         String name = reportletRequest.getParameter("cptname").toString();
@@ -45,6 +45,8 @@ public class ReadFromDatabase extends Reportlet {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            SimpleWork.checkOut();
         }
         return workbook;
     }

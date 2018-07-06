@@ -17,7 +17,7 @@ public class MobileWsdlTableDataDemo1 extends AbstractTableData {
     private String[][] data;
 
     public MobileWsdlTableDataDemo1() {
-        this.data = this.getData();
+        this.data = this.getMobileWsdlTableData();
     }
 
     public int getColumnCount() throws TableDataException {
@@ -72,7 +72,7 @@ public class MobileWsdlTableDataDemo1 extends AbstractTableData {
     }
 
 
-    public String[][] getData() {
+    public String[][] getMobileWsdlTableData() {
         try {
             String url = "http://www.webxml.com.cn/WebServices/MobileCodeWS.asmx?wsdl";
             EndpointReference targetEPR = new EndpointReference(url);
@@ -97,8 +97,6 @@ public class MobileWsdlTableDataDemo1 extends AbstractTableData {
             String[][] result = getResults(result1);
             return result;
         } catch (org.apache.axis2.AxisFault e) {
-            e.printStackTrace();
-        } catch (java.rmi.RemoteException e) {
             e.printStackTrace();
         }
         return new String[][]{{}};

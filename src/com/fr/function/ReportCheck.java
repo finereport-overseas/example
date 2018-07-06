@@ -1,8 +1,6 @@
 // 自定义函数实现表间校验
 package com.fr.function;
 
-import com.fr.base.Env;
-import com.fr.base.FRContext;
 import com.fr.base.ResultFormula;
 import com.fr.io.TemplateWorkBookIO;
 import com.fr.json.JSONArray;
@@ -28,12 +26,11 @@ public class ReportCheck extends AbstractFunction {
         // 定义返回的值
         Object returnValue = null;
         // 定义报表运行环境，才能运行读取的报表
-        Env oldEnv = FRContext.getCurrentEnv();
         try {
             ResultWorkBook rworkbook = null;
             // 读取模板
             WorkBook workbook = (WorkBook) TemplateWorkBookIO
-                    .readTemplateWorkBook(oldEnv, cptname);
+                    .readTemplateWorkBook(cptname);
             // 获取需要传递给报表的参数名与参数值，格式如[{"name":para1name,"value":para1value},{"name":para2name,"value":para2value},......]
             JSONArray parasArray = new JSONArray(args[1].toString());
             // 需要判断是否是5秒内执行过的

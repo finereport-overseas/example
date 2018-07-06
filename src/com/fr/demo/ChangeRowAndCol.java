@@ -1,8 +1,6 @@
 //遍历单元格
 package com.fr.demo;
 
-import com.fr.base.Env;
-import com.fr.base.FRContext;
 import com.fr.io.TemplateWorkBookIO;
 import com.fr.main.TemplateWorkBook;
 import com.fr.report.cell.TemplateCellElement;
@@ -10,6 +8,7 @@ import com.fr.report.elementcase.TemplateElementCase;
 import com.fr.report.worksheet.WorkSheet;
 import com.fr.web.core.Reportlet;
 import com.fr.web.request.ReportletRequest;
+import com.fr.workspace.simple.SimpleWork;
 
 import java.util.Map;
 
@@ -18,12 +17,13 @@ public class ChangeRowAndCol extends Reportlet {
     public TemplateWorkBook createReport(ReportletRequest reportletrequest) {
         // 定义最终需要返回的WorkBook对象  
         TemplateWorkBook workbook = null;
-        Env oldEnv = FRContext.getCurrentEnv();
+        String envPath = "D:\\FineReport_8.0\\WebReport\\WEB-INF";
+        SimpleWork.checkIn(envPath);
         WorkSheet newworksheet = new WorkSheet();
         String change = "0";
         try {
             // 读取模板保存为WorkBook对象  
-            workbook = TemplateWorkBookIO.readTemplateWorkBook(oldEnv,
+            workbook = TemplateWorkBookIO.readTemplateWorkBook(
                     "\\doc\\Primary\\GroupReport\\Group.cpt");
             // 读取请求中的参数判断是否需要切换行列显示，0表示不切换，1表示切换  
             if (reportletrequest.getParameter("change") != null) {
@@ -59,6 +59,8 @@ public class ChangeRowAndCol extends Reportlet {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            SimpleWork.checkOut();
         }
         return workbook;
     }

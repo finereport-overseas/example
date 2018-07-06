@@ -1,6 +1,7 @@
 package com.fr.data;
 
 import com.fr.base.Parameter;
+import com.fr.config.holder.impl.xml.XmlColConf;
 import com.fr.general.data.DataModel;
 import com.fr.script.Calculator;
 import com.fr.stable.ParameterProvider;
@@ -29,8 +30,8 @@ public class XMLDemoTableData extends AbstractParameterTableData {
     // 构造函数    
     public XMLDemoTableData() {
         // 定义需要的参数，这里定义一个参数，参数名为filename，给其一个默认值"Northwind.xml"    
-        this.parameters = new Parameter[1];
-        this.parameters[0] = new Parameter("filename", "Northwind");
+        this.parameters = new XmlColConf<>(new ArrayList(), ParameterProvider.class);
+        parameters.add(new Parameter("filename", "Northwind"));
     }
 
     /**

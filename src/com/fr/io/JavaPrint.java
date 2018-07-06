@@ -1,10 +1,9 @@
 package com.fr.io;
 
-import com.fr.base.FRContext;
 import com.fr.base.Parameter;
-import com.fr.dav.LocalEnv;
 import com.fr.main.TemplateWorkBook;
 import com.fr.print.PrintUtils;
+import com.fr.workspace.simple.SimpleWork;
 
 import java.util.HashMap;
 
@@ -13,9 +12,9 @@ public class JavaPrint {
     public static void main(String[] args) {
         // 定义报表运行环境,才能执行报表
         String envPath = "D:\\FineReport\\develop\\code\\build\\package\\WebReport\\WEB-INF";
-        FRContext.setCurrentEnv(new LocalEnv(envPath));
+        SimpleWork.checkIn(envPath);
         try {
-            TemplateWorkBook workbook = TemplateWorkBookIO.readTemplateWorkBook(FRContext.getCurrentEnv(), "GettingStarted.cpt");
+            TemplateWorkBook workbook = TemplateWorkBookIO.readTemplateWorkBook("GettingStarted.cpt");
             // 参数传值
             Parameter[] parameters = workbook.getParameters();
             HashMap<String, String> paraMap = new HashMap<String, String>();
@@ -30,6 +29,8 @@ public class JavaPrint {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            SimpleWork.checkOut();
         }
     }
 }

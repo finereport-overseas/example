@@ -20,7 +20,7 @@ public class MobileTableWsdlDataDemo extends AbstractTableData {
     private String[][] data;
 
     public MobileTableWsdlDataDemo() {
-        this.data = this.getData();
+        this.data = this.getMobileTableWsdlData();
     }
 
     @Override
@@ -82,7 +82,7 @@ public class MobileTableWsdlDataDemo extends AbstractTableData {
     }
 
 
-    public String[][] getData() {
+    public String[][] getMobileTableWsdlData() {
         try {
             String url = "http://www.webxml.com.cn/WebServices/MobileCodeWS.asmx?wsdl";
             EndpointReference targetEPR = new EndpointReference(url);
