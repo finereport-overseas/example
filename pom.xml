@@ -10,7 +10,6 @@
     </properties>
     <modules>
         <module>plugins</module>
-        <module>learner</module>
     </modules>
     <dependencies>
         <!-- core包 -->
@@ -51,10 +50,22 @@
             <version>${common-version}</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.fr.decision</groupId>
+            <artifactId>fine-decision-report</artifactId>
+            <version>${common-version}</version>
+            <scope>compile</scope>
+        </dependency>
         <!-- 定时调度包 -->
         <dependency>
             <groupId>com.fr.schedule</groupId>
             <artifactId>fine-schedule</artifactId>
+            <version>${common-version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fr.schedule</groupId>
+            <artifactId>fine-schedule-report</artifactId>
             <version>${common-version}</version>
             <scope>compile</scope>
         </dependency>
@@ -113,6 +124,13 @@
             <groupId>org.swingexplorer</groupId>
             <artifactId>swag</artifactId>
             <version>1.0</version>
+        </dependency>
+
+        <!-- mysql驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.44</version>
         </dependency>
 
     </dependencies>
