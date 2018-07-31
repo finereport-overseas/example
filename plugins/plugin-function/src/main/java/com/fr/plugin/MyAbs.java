@@ -1,0 +1,25 @@
+package com.fr.plugin;
+
+import com.fr.general.FArray;
+import com.fr.general.GeneralUtils;
+import com.fr.script.AbstractFunction;
+import com.fr.stable.ArrayUtils;
+import com.fr.stable.Primitive;
+
+public class MyAbs extends AbstractFunction  {
+
+    public Object run(Object[] args) {
+        int len = ArrayUtils.getLength(args);
+        if (len == 0) {
+            return Primitive.ERROR_VALUE;
+        } else if (len == 1) {
+            return Math.abs(GeneralUtils.objectToNumber(args[0]).doubleValue());
+        } else {
+            FArray<Double> result = new FArray<Double>();
+            for (Object arg : args) {
+                result.add(GeneralUtils.objectToNumber(arg).doubleValue());
+            }
+        }
+        return Primitive.ERROR_VALUE;
+    }
+}
