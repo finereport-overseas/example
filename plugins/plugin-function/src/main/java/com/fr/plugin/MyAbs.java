@@ -2,12 +2,17 @@ package com.fr.plugin;
 
 import com.fr.general.FArray;
 import com.fr.general.GeneralUtils;
+import com.fr.intelli.record.Focus;
+import com.fr.intelli.record.Original;
+import com.fr.record.analyzer.EnableMetrics;
 import com.fr.script.AbstractFunction;
 import com.fr.stable.ArrayUtils;
 import com.fr.stable.Primitive;
 
+@EnableMetrics
 public class MyAbs extends AbstractFunction  {
 
+    @Focus(id = "com.fr.plugin.function.test", text = "Function description", source = Original.PLUGIN)
     public Object run(Object[] args) {
         int len = ArrayUtils.getLength(args);
         if (len == 0) {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><plugin>
-    <id>com.fr.plugin.test</id>
+    <id>com.fr.plugin.function.test</id>
     <name><![CDATA[测试函数插件]]></name>
     <active>yes</active>
     <version>1.0</version>
