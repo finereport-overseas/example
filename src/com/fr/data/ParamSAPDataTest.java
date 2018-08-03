@@ -10,6 +10,7 @@ import com.sap.conn.jco.JCoFunction;
 import com.sap.conn.jco.JCoTable;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class ParamSAPDataTest extends AbstractTableData {
     private String[] columnNames = null;
@@ -21,12 +22,12 @@ public class ParamSAPDataTest extends AbstractTableData {
     private static JCoDestination jCoDestination;
 
     public ParamSAPDataTest() {
-        ArrayList<String> arrayList = new ArrayList<>();
+        ArrayList<String> arrayList = new ArrayList<String>();
         arrayList.add("LIFNR");
         arrayList.add("NAME1");
 
 
-        this.parameters = new XmlColConf<>(arrayList, ParameterProvider.class);
+        this.parameters = new XmlColConf<Collection<ParameterProvider>>(arrayList, ParameterProvider.class);
 
         this.columnNames = new String[this.columnNum];
         this.columnNames[0] = "供应商编码";

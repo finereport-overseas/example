@@ -4,7 +4,7 @@
     <name><![CDATA[文档demo代码集成]]></name>
     <active>yes</active>
     <hidden>no</hidden>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <env-version>10.0~</env-version>
     <jartime>2018-08-02</jartime>
     <vendor>finereport</vendor>
