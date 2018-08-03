@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -30,7 +31,7 @@ public class XMLDemoTableData extends AbstractParameterTableData {
     // 构造函数    
     public XMLDemoTableData() {
         // 定义需要的参数，这里定义一个参数，参数名为filename，给其一个默认值"Northwind.xml"    
-        this.parameters = new XmlColConf<>(new ArrayList(), ParameterProvider.class);
+        this.parameters = new XmlColConf<Collection<ParameterProvider>>(new ArrayList(), ParameterProvider.class);
         parameters.add(new Parameter("filename", "Northwind"));
     }
 
