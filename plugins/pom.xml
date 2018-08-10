@@ -14,4 +14,8 @@
     <modules>
         <module>plugin-function</module>
     </modules>
+    <build>
+        <!---如果要更改调试插件，改这里的配置就可以了-->
+        <outputDirectory>${web-inf-path}/plugins/plugin-com.fr.plugin.function.test-1.0/classes</outputDirectory>
+    </build>
 </project>
