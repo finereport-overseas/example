@@ -3,14 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.fr.plugin</groupId>
     <artifactId>starter</artifactId>
-    <version>1.0</version>
+    <version>10.0</version>
     <packaging>pom</packaging>
     <properties>
         <common-version>10.0-RELEASE-SNAPSHOT</common-version>
         <web-inf-path>${project.basedir}/webroot/WEB-INF</web-inf-path>
     </properties>
     <modules>
-        <module>plugins</module>
+        <module>plugin-function</module>
     </modules>
     <dependencies>
         <!-- core包 -->
@@ -143,6 +143,7 @@
 
     </dependencies>
     <build>
+        <outputDirectory>${web-inf-path}/classes</outputDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
