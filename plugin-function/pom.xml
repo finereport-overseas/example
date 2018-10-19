@@ -11,4 +11,17 @@
     </parent>
     <packaging>jar</packaging>
     <artifactId>plugin-function</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.fr.plugin</groupId>
+            <artifactId>gson</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/gson-2.3.1.jar</systemPath>
+        </dependency>
+    </dependencies>
+    <build>
+        <!---如果要更改调试插件，改这里的配置就可以了-->
+        <outputDirectory>${project.basedir}/../webroot/WEB-INF/plugins/plugin-com.fr.plugin.function.test-1.0/classes</outputDirectory>
+    </build>
 </project>
