@@ -11,17 +11,8 @@
     </properties>
     <modules>
         <module>plugin-function</module>
-        <module>plugin-formula-script</module>
-        <module>plugin-iframe</module>
     </modules>
     <dependencies>
-        <!-- tools.jar包 -->
-        <dependency>
-            <groupId>jdk.tools</groupId>
-            <artifactId>tools</artifactId>
-            <version>1.8</version>
-            <systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
-        </dependency>
         <!-- core包 -->
         <dependency>
             <groupId>com.fr.third</groupId>
