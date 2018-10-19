@@ -13,5 +13,6 @@
     ]]></change-notes>
     <extra-core>
         <FunctionDefineProvider class="com.fr.plugin.MyAbs" name="MyAbs" description="求绝对值，支持数组。"/>
+        <LocaleFinder class="com.fr.plugin.MyLocaleFinder"/>
     </extra-core>
 </plugin>

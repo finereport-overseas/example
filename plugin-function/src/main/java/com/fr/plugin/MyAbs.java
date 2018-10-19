@@ -12,7 +12,7 @@ import com.fr.stable.Primitive;
 @EnableMetrics
 public class MyAbs extends AbstractFunction  {
 
-    @Focus(id = "com.fr.plugin.function.test", text = "Function description", source = Original.PLUGIN)
+    @Focus(id = "com.fr.plugin.function.test", text = "Plugin-Test_Function_Abs", source = Original.PLUGIN)
     public Object run(Object[] args) {
         int len = ArrayUtils.getLength(args);
         if (len == 0) {
