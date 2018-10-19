@@ -3,3 +3,4 @@
 /target/
 /download/
 /webroot/
+.DS_Store
