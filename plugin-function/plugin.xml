@@ -15,4 +15,5 @@
         <FunctionDefineProvider class="com.fr.plugin.MyAbs" name="MyAbs" description="求绝对值，支持数组。"/>
         <LocaleFinder class="com.fr.plugin.MyLocaleFinder"/>
     </extra-core>
+    <function-recorder class="com.fr.plugin.MyAbs"/>
 </plugin>

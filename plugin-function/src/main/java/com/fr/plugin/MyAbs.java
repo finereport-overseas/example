@@ -24,13 +24,24 @@ public class MyAbs extends AbstractFunction  {
         if (len == 0) {
             return Primitive.ERROR_VALUE;
         } else if (len == 1) {
-            return Math.abs(GeneralUtils.objectToNumber(args[0]).doubleValue());
+            Object one = args[0];
+            if (one instanceof FArray) {
+                FArray data = (FArray)one;
+                FArray<Double> result = new FArray<Double>();
+                for (Object el : data) {
+                    result.add(Math.abs(GeneralUtils.objectToNumber(el).doubleValue()));
+                }
+                return result;
+            } else {
+                return Math.abs(GeneralUtils.objectToNumber(one).doubleValue());
+            }
         } else {
             FArray<Double> result = new FArray<Double>();
             for (Object arg : args) {
-                result.add(GeneralUtils.objectToNumber(arg).doubleValue());
+                result.add(Math.abs(GeneralUtils.objectToNumber(arg).doubleValue()));
             }
+            return result;
         }
-        return Primitive.ERROR_VALUE;
+
     }
 }
