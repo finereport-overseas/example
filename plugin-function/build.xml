@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project basedir="." default="jar" name="plugin">
     <!-- JDK路径，根据自己机器上实际位置修改-->
-    <property name="jdk.home" value="/Library/Java/JavaVirtualMachines/JDK1.8/Contents/Home"/>
+    <property name="jdk.home" value="/Library/Java/JavaVirtualMachines/jdk1.8/Contents/Home"/>
 
     <property name="libs" value="${basedir}/lib"/>
     <property name="publicLibs" value=""/>

@@ -7,7 +7,7 @@
     <packaging>pom</packaging>
     <properties>
         <common-version>10.0-RELEASE-SNAPSHOT</common-version>
-        <web-inf-path>${project.basedir}/webroot/WEB-INF</web-inf-path>
+        <web-inf-bucket>${project.basedir}/webroot/WEB-INF</web-inf-bucket>
     </properties>
     <modules>
         <module>plugin-function</module>
@@ -141,9 +141,22 @@
             <version>5.1.44</version>
         </dependency>
 
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <version>3.5.1</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
     <build>
-        <outputDirectory>${web-inf-path}/classes</outputDirectory>
+        <outputDirectory>${web-inf-bucket}/classes</outputDirectory>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
