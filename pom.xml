@@ -10,7 +10,8 @@
         <web-inf-bucket>${project.basedir}/webroot/WEB-INF</web-inf-bucket>
     </properties>
     <modules>
-        <module>plugin-function</module>
+        <module>demo-file-submit-oss</module>
+        <module>crm-file-manager</module>
     </modules>
     <dependencies>
         <!-- core包 -->
