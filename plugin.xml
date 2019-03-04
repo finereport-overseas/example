@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<plugin>
+    <id>com.fr.plugin.doc.demo.v10</id>
+    <name><![CDATA[文档demo代码集成]]></name>
+    <active>yes</active>
+    <hidden>no</hidden>
+    <version>1.1.1</version>
+    <env-version>10.0~</env-version>
+    <jartime>2018-08-02</jartime>
+    <vendor>finereport</vendor>
+    <description><![CDATA[集成帮助文档中的demo代码]]></description>
+    <change-notes><![CDATA[
+        [2018-01-25] 发布。<br>
+        [2018-08-02] 插件适配10
+        ]]></change-notes>
+    <extra-core>
+
+    </extra-core>
+    <extra-designer>
+
+    </extra-designer>
+
+</plugin>
