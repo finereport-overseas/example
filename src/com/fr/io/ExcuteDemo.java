@@ -1,13 +1,21 @@
 package com.fr.io;
 
-import com.fr.base.operator.common.CommonOperator;
-import com.fr.env.operator.CommonOperatorImpl;
-import com.fr.general.ModuleContext;
+import com.fr.config.activator.BaseDBActivator;
+import com.fr.config.activator.ConfigurationActivator;
+import com.fr.data.impl.config.activator.RestrictionActivator;
 import com.fr.io.exporter.ExcelExporter;
 import com.fr.main.TemplateWorkBook;
 import com.fr.main.workbook.ResultWorkBook;
-import com.fr.report.module.EngineModule;
+import com.fr.module.Module;
+import com.fr.module.tool.ActivatorToolBox;
+import com.fr.report.ReportActivator;
+import com.fr.report.module.ReportBaseActivator;
+import com.fr.serialization.SerializationActivator;
 import com.fr.stable.WriteActor;
+import com.fr.startup.WorkspaceRegister;
+import com.fr.store.StateServerActivator;
+import com.fr.workspace.engine.WorkspaceActivator;
+import com.fr.workspace.server.ServerWorkspaceRegister;
 import com.fr.workspace.simple.SimpleWork;
 
 import java.io.File;
@@ -18,11 +26,21 @@ public class ExcuteDemo {
     public static void main(String[] args) {
         try {
             // 首先需要定义执行所在的环境，这样才能正确读取数据库信息  
-            String envPath = "D:\\FineReport_8.0\\WebReport\\WEB-INF";
-
-            SimpleWork.checkIn(envPath);
-
-            ModuleContext.startModule(EngineModule.class.getName());
+            // 定义报表运行环境,用于执行报表
+            Module module = ActivatorToolBox.simpleLink(
+                    new WorkspaceActivator(),
+                    new BaseDBActivator(),
+                    new ConfigurationActivator(),
+                    new StateServerActivator(),
+                    new ReportBaseActivator(),
+                    new RestrictionActivator(),
+                    new ReportActivator(),
+                    new WorkspaceRegister(),
+                    new ServerWorkspaceRegister(),
+                    new SerializationActivator());
+            String envpath = "D:\\FineReport_10\\webapps\\webroot\\WEB-INF";//工程路径
+            SimpleWork.checkIn(envpath);
+            module.start();
             // 读取模板  
             TemplateWorkBook workbook = TemplateWorkBookIO.readTemplateWorkBook("\\doc\\Primary\\Parameter\\Parameter.cpt");
             /*
