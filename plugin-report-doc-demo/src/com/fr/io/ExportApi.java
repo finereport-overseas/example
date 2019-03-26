@@ -20,12 +20,8 @@ import com.fr.module.Module;
 import com.fr.module.tool.ActivatorToolBox;
 import com.fr.report.ReportActivator;
 import com.fr.report.module.ReportBaseActivator;
-import com.fr.serialization.SerializationActivator;
 import com.fr.stable.WriteActor;
-import com.fr.startup.WorkspaceRegister;
 import com.fr.store.StateServerActivator;
-import com.fr.workspace.engine.WorkspaceActivator;
-import com.fr.workspace.server.ServerWorkspaceRegister;
 import com.fr.workspace.simple.SimpleWork;
 
 import java.io.File;
@@ -35,19 +31,13 @@ import java.io.FileOutputStream;
 public class ExportApi {
     public static void main(String[] args) {
         // 定义报表运行环境,才能执行报表  
-        // 定义报表运行环境,用于执行报表
-        Module module = ActivatorToolBox.simpleLink(
-                new WorkspaceActivator(),
-                new BaseDBActivator(),
+        Module module = ActivatorToolBox.simpleLink(new BaseDBActivator(),
                 new ConfigurationActivator(),
                 new StateServerActivator(),
                 new ReportBaseActivator(),
                 new RestrictionActivator(),
-                new ReportActivator(),
-                new WorkspaceRegister(),
-                new ServerWorkspaceRegister(),
-                new SerializationActivator());
-        String envpath = "D:\\FineReport_10\\webapps\\webroot\\WEB-INF";//工程路径
+                new ReportActivator());
+        String envpath = "D:\\FineReport_10.0\\webapps\\webroot\\WEB-INF";
         SimpleWork.checkIn(envpath);
         module.start();
         ResultWorkBook rworkbook = null;

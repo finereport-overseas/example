@@ -1,6 +1,9 @@
 package com.fr.io;
 
 import com.fr.base.Parameter;
+import com.fr.config.activator.BaseDBActivator;
+import com.fr.config.activator.ConfigurationActivator;
+import com.fr.data.impl.config.activator.RestrictionActivator;
 import com.fr.general.ModuleContext;
 import com.fr.io.exporter.ExcelExporter;
 import com.fr.io.exporter.LargeDataPageExcelExporter;
@@ -11,9 +14,13 @@ import com.fr.io.exporter.PageToSheetExcelExporter;
 import com.fr.io.exporter.excel.stream.StreamExcel2007Exporter;
 import com.fr.main.impl.WorkBook;
 import com.fr.main.workbook.ResultWorkBook;
+import com.fr.module.Module;
+import com.fr.module.tool.ActivatorToolBox;
+import com.fr.report.ReportActivator;
 import com.fr.report.core.ReportUtils;
-import com.fr.report.module.EngineModule;
+import com.fr.report.module.ReportBaseActivator;
 import com.fr.stable.WriteActor;
+import com.fr.store.StateServerActivator;
 import com.fr.workspace.simple.SimpleWork;
 
 import java.io.File;
@@ -22,10 +29,16 @@ import java.io.FileOutputStream;
 
 public class ExportExcel {
     public static void main(String[] args) {
-        // 定义报表运行环境,才能执行报表  
+        // 定义报表运行环境,才能执行报表
+        Module module = ActivatorToolBox.simpleLink(new BaseDBActivator(),
+                new ConfigurationActivator(),
+                new StateServerActivator(),
+                new ReportBaseActivator(),
+                new RestrictionActivator(),
+                new ReportActivator());
         String envpath = "D:\\FineReport_8.0\\WebReport\\WEB-INF";
         SimpleWork.checkIn(envpath);
-        ModuleContext.startModule(EngineModule.class.getName());
+        module.start();
         ResultWorkBook rworkbook = null;
         try {
             // 未执行模板工作薄  

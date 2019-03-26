@@ -4,7 +4,7 @@
     <name><![CDATA[文档demo代码集成]]></name>
     <active>yes</active>
     <hidden>no</hidden>
-    <version>1.1.1</version>
+    <version>1.2</version>
     <env-version>10.0~</env-version>
     <jartime>2018-08-02</jartime>
     <vendor>finereport</vendor>
@@ -13,8 +13,9 @@
         [2018-01-25] 发布。<br>
         [2018-08-02] 插件适配10
         ]]></change-notes>
+    <function-recorder class="com.fr.plugin.core.MyLocaleFinder"/>
     <extra-core>
-
+        <SiteTransformer class="com.fr.plugin.core.secondary.SiteTransformerImpl"/>
     </extra-core>
     <extra-designer>
 

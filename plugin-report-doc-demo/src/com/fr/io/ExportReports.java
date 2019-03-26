@@ -1,14 +1,21 @@
 package com.fr.io;
 
 import com.fr.base.Parameter;
+import com.fr.config.activator.BaseDBActivator;
+import com.fr.config.activator.ConfigurationActivator;
+import com.fr.data.impl.config.activator.RestrictionActivator;
 import com.fr.general.ModuleContext;
 import com.fr.io.exporter.PageExcelExporter;
 import com.fr.main.TemplateWorkBook;
 import com.fr.main.workbook.PageWorkBook;
+import com.fr.module.Module;
+import com.fr.module.tool.ActivatorToolBox;
+import com.fr.report.ReportActivator;
 import com.fr.report.core.ReportUtils;
-import com.fr.report.module.EngineModule;
+import com.fr.report.module.ReportBaseActivator;
 import com.fr.report.report.PageReport;
 import com.fr.stable.PageActor;
+import com.fr.store.StateServerActivator;
 import com.fr.workspace.simple.SimpleWork;
 
 import java.io.File;
@@ -17,10 +24,17 @@ import java.io.OutputStream;
 
 public class ExportReports {
     public static void main(String[] args) {
-        // ���屨�����л���,����ִ�б���    
+        // ���屨�����л���,����ִ�б���
+        Module module = ActivatorToolBox.simpleLink(new BaseDBActivator(),
+                new ConfigurationActivator(),
+                new StateServerActivator(),
+                new ReportBaseActivator(),
+                new RestrictionActivator(),
+                new ReportActivator());
         String envpath = "D:\\FineReport\\develop\\code\\build\\package\\WebReport\\WEB-INF";
         SimpleWork.checkIn(envpath);
-        ModuleContext.startModule(EngineModule.class.getName());
+        module.start();
+
         // ���г����һЩ��Ҫ��ʼ��    
         try {
             // δִ��ģ�幤����    

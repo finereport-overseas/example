@@ -1,8 +1,16 @@
 package com.fr.io;
 
 import com.fr.base.Parameter;
+import com.fr.config.activator.BaseDBActivator;
+import com.fr.config.activator.ConfigurationActivator;
+import com.fr.data.impl.config.activator.RestrictionActivator;
 import com.fr.main.TemplateWorkBook;
+import com.fr.module.Module;
+import com.fr.module.tool.ActivatorToolBox;
 import com.fr.print.PrintUtils;
+import com.fr.report.ReportActivator;
+import com.fr.report.module.ReportBaseActivator;
+import com.fr.store.StateServerActivator;
 import com.fr.workspace.simple.SimpleWork;
 
 import java.util.HashMap;
@@ -11,8 +19,15 @@ import java.util.HashMap;
 public class JavaPrint {
     public static void main(String[] args) {
         // 定义报表运行环境,才能执行报表
+        Module module = ActivatorToolBox.simpleLink(new BaseDBActivator(),
+                new ConfigurationActivator(),
+                new StateServerActivator(),
+                new ReportBaseActivator(),
+                new RestrictionActivator(),
+                new ReportActivator());
         String envPath = "D:\\FineReport\\develop\\code\\build\\package\\WebReport\\WEB-INF";
         SimpleWork.checkIn(envPath);
+        module.start();
         try {
             TemplateWorkBook workbook = TemplateWorkBookIO.readTemplateWorkBook("GettingStarted.cpt");
             // 参数传值
