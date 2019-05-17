@@ -4,3 +4,4 @@
 /download/
 /webroot/
 .DS_Store
+lib/report/*.jar
