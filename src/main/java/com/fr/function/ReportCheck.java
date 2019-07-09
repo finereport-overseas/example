@@ -1,13 +1,11 @@
 // 自定义函数实现表间校验  
 package com.fr.function;
 
-import java.util.HashMap;
 import com.fr.base.ResultFormula;
 import com.fr.base.operator.common.CommonOperator;
 import com.fr.chart.activator.ChartBaseActivator;
 import com.fr.config.activator.BaseDBActivator;
 import com.fr.config.activator.ConfigurationActivator;
-import com.fr.data.impl.config.activator.RestrictionActivator;
 import com.fr.env.operator.CommonOperatorImpl;
 import com.fr.io.TemplateWorkBookIO;
 import com.fr.json.JSONArray;
@@ -17,6 +15,7 @@ import com.fr.main.workbook.ResultWorkBook;
 import com.fr.module.Module;
 import com.fr.module.tool.ActivatorToolBox;
 import com.fr.report.ReportActivator;
+import com.fr.report.RestrictionActivator;
 import com.fr.report.cell.CellElement;
 import com.fr.report.module.ReportBaseActivator;
 import com.fr.report.report.ResultReport;
@@ -25,6 +24,8 @@ import com.fr.stable.WriteActor;
 import com.fr.store.StateServerActivator;
 import com.fr.workspace.simple.SimpleWork;
 import com.fr.write.cal.WB;
+
+import java.util.HashMap;
 
 public class ReportCheck extends AbstractFunction {
     private static HashMap wMap = new HashMap();

@@ -1,16 +1,18 @@
 package com.fr.io;
+
 import com.fr.base.Parameter;
 import com.fr.config.activator.BaseDBActivator;
 import com.fr.config.activator.ConfigurationActivator;
-import com.fr.data.impl.config.activator.RestrictionActivator;
 import com.fr.main.TemplateWorkBook;
 import com.fr.module.Module;
 import com.fr.module.tool.ActivatorToolBox;
 import com.fr.print.PrintUtils;
 import com.fr.report.ReportActivator;
+import com.fr.report.RestrictionActivator;
 import com.fr.report.module.ReportBaseActivator;
 import com.fr.store.StateServerActivator;
 import com.fr.workspace.simple.SimpleWork;
+
 import java.util.HashMap;
 
 public class JavaPrint {

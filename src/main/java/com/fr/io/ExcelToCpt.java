@@ -1,23 +1,25 @@
 package com.fr.io;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
+
 import com.fr.base.operator.common.CommonOperator;
 import com.fr.chart.activator.ChartBaseActivator;
 import com.fr.config.activator.BaseDBActivator;
 import com.fr.config.activator.ConfigurationActivator;
-import com.fr.data.impl.config.activator.RestrictionActivator;
 import com.fr.env.operator.CommonOperatorImpl;
-import com.fr.main.impl.WorkBook;
 import com.fr.io.importer.Excel2007ReportImporter;
 import com.fr.main.TemplateWorkBook;
+import com.fr.main.impl.WorkBook;
 import com.fr.module.Module;
 import com.fr.module.tool.ActivatorToolBox;
 import com.fr.report.ReportActivator;
+import com.fr.report.RestrictionActivator;
 import com.fr.report.module.ReportBaseActivator;
 import com.fr.store.StateServerActivator;
 import com.fr.workspace.simple.SimpleWork;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 
 public class ExcelToCpt {
     public static void main(String[] args) throws Exception {

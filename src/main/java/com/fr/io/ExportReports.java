@@ -1,26 +1,28 @@
 package com.fr.io;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
+
+import com.fr.base.Parameter;
 import com.fr.base.operator.common.CommonOperator;
 import com.fr.chart.activator.ChartBaseActivator;
 import com.fr.config.activator.BaseDBActivator;
 import com.fr.config.activator.ConfigurationActivator;
-import com.fr.data.impl.config.activator.RestrictionActivator;
 import com.fr.env.operator.CommonOperatorImpl;
-import com.fr.base.Parameter;
 import com.fr.io.exporter.PageExcelExporter;
 import com.fr.main.TemplateWorkBook;
 import com.fr.main.workbook.PageWorkBook;
 import com.fr.module.Module;
 import com.fr.module.tool.ActivatorToolBox;
 import com.fr.report.ReportActivator;
+import com.fr.report.RestrictionActivator;
 import com.fr.report.core.ReportUtils;
 import com.fr.report.module.ReportBaseActivator;
 import com.fr.report.report.PageReport;
 import com.fr.stable.PageActor;
 import com.fr.store.StateServerActivator;
 import com.fr.workspace.simple.SimpleWork;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 
 public class ExportReports {
     public static void main(String[] args) {
