@@ -1,9 +1,9 @@
 package com.fr.io;
+
 import com.fr.base.operator.common.CommonOperator;
 import com.fr.chart.activator.ChartBaseActivator;
 import com.fr.config.activator.BaseDBActivator;
 import com.fr.config.activator.ConfigurationActivator;
-import com.fr.data.impl.config.activator.RestrictionActivator;
 import com.fr.env.operator.CommonOperatorImpl;
 import com.fr.io.exporter.ExcelExporter;
 import com.fr.main.TemplateWorkBook;
@@ -11,10 +11,12 @@ import com.fr.main.workbook.ResultWorkBook;
 import com.fr.module.Module;
 import com.fr.module.tool.ActivatorToolBox;
 import com.fr.report.ReportActivator;
+import com.fr.report.RestrictionActivator;
 import com.fr.report.module.ReportBaseActivator;
 import com.fr.stable.WriteActor;
 import com.fr.store.StateServerActivator;
 import com.fr.workspace.simple.SimpleWork;
+
 import java.io.File;
 import java.io.FileOutputStream;
 

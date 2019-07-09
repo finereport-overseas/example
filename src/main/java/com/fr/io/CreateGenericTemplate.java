@@ -1,4 +1,5 @@
 package com.fr.io;
+
 import com.fr.base.TableData;
 import com.fr.base.operator.common.CommonOperator;
 import com.fr.chart.activator.ChartBaseActivator;
@@ -6,13 +7,13 @@ import com.fr.config.activator.BaseDBActivator;
 import com.fr.config.activator.ConfigurationActivator;
 import com.fr.data.impl.DBTableData;
 import com.fr.data.impl.NameDatabaseConnection;
-import com.fr.data.impl.config.activator.RestrictionActivator;
 import com.fr.env.operator.CommonOperatorImpl;
 import com.fr.general.data.TableDataColumn;
 import com.fr.main.impl.WorkBook;
 import com.fr.module.Module;
 import com.fr.module.tool.ActivatorToolBox;
 import com.fr.report.ReportActivator;
+import com.fr.report.RestrictionActivator;
 import com.fr.report.cell.DefaultTemplateCellElement;
 import com.fr.report.cell.TemplateCellElement;
 import com.fr.report.cell.cellattr.core.group.DSColumn;
