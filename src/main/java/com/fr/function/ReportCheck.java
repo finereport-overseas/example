@@ -4,9 +4,11 @@ package com.fr.function;
 import com.fr.base.ResultFormula;
 import com.fr.base.operator.common.CommonOperator;
 import com.fr.chart.activator.ChartBaseActivator;
+import com.fr.cluster.engine.activator.standalone.StandaloneModeActivator;
 import com.fr.config.activator.BaseDBActivator;
 import com.fr.config.activator.ConfigurationActivator;
 import com.fr.env.operator.CommonOperatorImpl;
+import com.fr.general.I18nResource;
 import com.fr.io.TemplateWorkBookIO;
 import com.fr.json.JSONArray;
 import com.fr.json.JSONObject;
@@ -19,6 +21,7 @@ import com.fr.report.RestrictionActivator;
 import com.fr.report.cell.CellElement;
 import com.fr.report.module.ReportBaseActivator;
 import com.fr.report.report.ResultReport;
+import com.fr.scheduler.SchedulerActivator;
 import com.fr.script.AbstractFunction;
 import com.fr.stable.WriteActor;
 import com.fr.store.StateServerActivator;
@@ -40,15 +43,20 @@ public class ReportCheck extends AbstractFunction {
         // 定义报表运行环境,用于执行报表
         Module module = ActivatorToolBox.simpleLink(new BaseDBActivator(),
                 new ConfigurationActivator(),
+                new StandaloneModeActivator(),
                 new StateServerActivator(),
+                new SchedulerActivator(),
                 new ReportBaseActivator(),
                 new RestrictionActivator(),
                 new ReportActivator(),
                 new ChartBaseActivator());
         SimpleWork.supply(CommonOperator.class, new CommonOperatorImpl());
-        String envpath= "//Applications//FineReport10_325//webapps//webroot//WEB-INF"; //工程路径
+        String envpath = "//Applications//FineReport10_325//webapps//webroot//WEB-INF";//工程路径
         SimpleWork.checkIn(envpath);
+        I18nResource.getInstance();
         module.start();
+
+
         try {
             ResultWorkBook rworkbook = null;
             // 读取模板
