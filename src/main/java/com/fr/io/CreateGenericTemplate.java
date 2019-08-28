@@ -21,6 +21,7 @@ import com.fr.report.cell.TemplateCellElement;
 import com.fr.report.cell.cellattr.core.group.DSColumn;
 import com.fr.report.module.ReportBaseActivator;
 import com.fr.report.worksheet.WorkSheet;
+import com.fr.report.write.WriteActivator;
 import com.fr.scheduler.SchedulerActivator;
 import com.fr.store.StateServerActivator;
 import com.fr.workspace.simple.SimpleWork;
@@ -37,11 +38,12 @@ public class CreateGenericTemplate {
                 new ConfigurationActivator(),
                 new StandaloneModeActivator(),
                 new StateServerActivator(),
+                new ChartBaseActivator(),
                 new SchedulerActivator(),
                 new ReportBaseActivator(),
                 new RestrictionActivator(),
                 new ReportActivator(),
-                new ChartBaseActivator());
+                new WriteActivator());
         SimpleWork.supply(CommonOperator.class, new CommonOperatorImpl());
         String envpath = "//Applications//FineReport10_325//webapps//webroot//WEB-INF";//工程路径
         SimpleWork.checkIn(envpath);
