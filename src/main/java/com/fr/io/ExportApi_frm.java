@@ -57,11 +57,11 @@ public class ExportApi_frm {
             outputStream = new FileOutputStream(new File("C:\\FTPServer\\1528.xlsx"));
             StreamExcel2007Exporter ExcelExport1 = new StreamExcel2007Exporter();
              ExcelExport1.export(outputStream,re);
-            // 将结果工作薄导出为Pdf文件
+            // 将结果工作薄导出为PDF文件
             outputStream = new FileOutputStream(new File("C:\\FTPServer\\PdfExport.pdf"));
             PDFExporter PdfExport = new PDFExporter();
             PdfExport.export(outputStream, re);
-            //将结果工作薄导出为image文件
+            //将结果工作薄导出为Image文件
             outputStream = new FileOutputStream(new File("C:\\FTPServer\\PngExport.png"));
             ImageExporter ImageExport = new ImageExporter();
             ImageExport.export(outputStream, re);
