@@ -30,7 +30,7 @@ import java.io.FileOutputStream;
 
 public class ExportApi_frm { 
     public static void main(String[] args) {
-        // ¶¨Òå±¨±íÔËĞĞ»·¾³,ÓÃÓÚÖ´ĞĞ±¨±í
+        // å®šä¹‰æŠ¥è¡¨è¿è¡Œç¯å¢ƒ,ç”¨äºæ‰§è¡ŒæŠ¥è¡¨
         Module module = ActivatorToolBox.simpleLink(new BaseDBActivator(),
                 new ConfigurationActivator(),
                 new StandaloneModeActivator(),
@@ -42,72 +42,26 @@ public class ExportApi_frm {
                 new WriteActivator(),
                 new ChartBaseActivator());
         SimpleWork.supply(CommonOperator.class, new CommonOperatorImpl());
-        String envpath = "C:\\Users\\hipsh\\Desktop\\apache-tomcat-8.5.38-10.0\\webapps\\webroot\\WEB-INF\\";//¹¤³ÌÂ·¾¶
+        String envpath = "C:\\Users\\hipsh\\Desktop\\apache-tomcat-8.5.38-10.0\\webapps\\webroot\\WEB-INF\\";//å·¥ç¨‹è·¯å¾„
         SimpleWork.checkIn(envpath);
         I18nResource.getInstance();
         module.start();
-
-
-//        ResultWorkBook rworkbook = null;
         try {
-            // µ¼³öcpt£¬Î´Ö´ĞĞÄ£°å¹¤×÷±¡
-
-//            WorkBook workbook = (WorkBook) TemplateWorkBookIO
-//                    .readTemplateWorkBook("²âÊÔÄ£°å.frm");
-            // »ñÈ¡±¨±í²ÎÊı²¢ÉèÖÃÖµ£¬µ¼³öÄÚÖÃÊı¾İ¼¯Ê±Êı¾İ¼¯»á¸ù¾İ²ÎÊıÖµ²éÑ¯³ö½á¹û´Ó¶ø×ªÎªÄÚÖÃÊı¾İ¼¯
-//            Parameter[] parameters = workbook.getParameters();
-//            parameters[0].setValue("»ª¶«");
-            // ¶¨ÒåparametermapÓÃÓÚÖ´ĞĞ±¨±í£¬½«Ö´ĞĞºóµÄ½á¹û¹¤×÷±¡±£´æÎªrworkBook
+  
             java.util.Map parameterMap = new java.util.HashMap();
             parameterMap.put("aa", "1");
-//            for (int i = 0; i < parameters.length; i++) {
-//                parameterMap.put(parameters[i].getName(), parameters[i]
-//                        .getValue());
-//            }
-            //µ¼³öfrmÊ±ÓÃÕâ¸ö
             ResultWorkBook re =  FormToWBExecutor.executeForm("test.frm",parameterMap);
-            // ¶¨ÒåÊä³öÁ÷
+            // å®šä¹‰è¾“å‡ºæµ
             FileOutputStream outputStream;
-//            // ½«Î´Ö´ĞĞÄ£°å¹¤×÷±¡µ¼³öÎªÄÚÖÃÊı¾İ¼¯Ä£°å
-//            outputStream = new FileOutputStream(new File("/Users//susie//Downloads//EmbExport.cpt"));
-//            EmbeddedTableDataExporter templateExporter = new EmbeddedTableDataExporter();
-//            templateExporter.export(outputStream, workbook);
-//            // ½«Ä£°å¹¤×÷±¡µ¼³öÄ£°åÎÄ¼ş£¬ÔÚµ¼³öÇ°Äú¿ÉÒÔ±à¼­µ¼ÈëµÄÄ£°å¹¤×÷±¡£¬¿É²Î¿¼±¨±íµ÷ÓÃÕÂ½Ú
-//            outputStream = new FileOutputStream(new File("/Users//susie//Downloads//TmpExport.cpt"));
-//            ((WorkBook) workbook).export(outputStream);
-//            // ½«½á¹û¹¤×÷±¡µ¼³öÎª2003ExcelÎÄ¼ş
-//            outputStream = new FileOutputStream(new File("/Users//susie//Downloads//ExcelExport.xls"));
-//            ExcelExporter ExcelExport = new ExcelExporter();
-//            ExcelExport.export(outputStream, workbook.execute(parameterMap, new WriteActor()));
-            // ½«½á¹û¹¤×÷±¡µ¼³öÎªExcelÎÄ¼ş
+            // å°†ç»“æœå·¥ä½œè–„å¯¼å‡ºä¸ºExcelæ–‡ä»¶
             outputStream = new FileOutputStream(new File("C:\\FTPServer\\1528.xlsx"));
             StreamExcel2007Exporter ExcelExport1 = new StreamExcel2007Exporter();
-            //ResultWorkBook re = FSFormletHandler.executeForm("calendar.frm",parameterMap);
-            
-            //ResultWorkBook re = FSFormletHandler.executeForm("test.frm",parameterMap);
-           // ExcelExport1.export(outputStream, workbook.execute(parameterMap, new WriteActor()));
              ExcelExport1.export(outputStream,re);
-//            // ½«½á¹û¹¤×÷±¡µ¼³öÎªWordÎÄ¼ş
-//            outputStream = new FileOutputStream(new File("/Users//susie//Downloads//WordExport.doc"));
-//            WordExporter WordExport = new WordExporter();
-//            WordExport.export(outputStream, workbook.execute(parameterMap, new WriteActor()));
-//            // ½«½á¹û¹¤×÷±¡µ¼³öÎªPdfÎÄ¼ş
+            // å°†ç»“æœå·¥ä½œè–„å¯¼å‡ºä¸ºPdfæ–‡ä»¶
             outputStream = new FileOutputStream(new File("C:\\FTPServer\\PdfExport.pdf"));
             PDFExporter PdfExport = new PDFExporter();
             PdfExport.export(outputStream, re);
-//            // ½«½á¹û¹¤×÷±¡µ¼³öÎªTxtÎÄ¼ş£¨txtÎÄ¼ş±¾Éí²»Ö§³Ö±í¸ñ¡¢Í¼±íµÈ£¬±»µ¼³öÄ£°åÒ»°ãÎªÃ÷Ï¸±í£©
-//            outputStream = new FileOutputStream(new File("/Users//susie//Downloads//TxtExport.txt"));
-//            TextExporter TxtExport = new TextExporter();
-//            TxtExport.export(outputStream, workbook.execute(parameterMap, new WriteActor()));
-//            // ½«½á¹û¹¤×÷±¡µ¼³öÎªCsvÎÄ¼ş
-//            outputStream = new FileOutputStream(new File("/Users//susie//Downloads//CsvExport.csv"));
-//            CSVExporter CsvExport = new CSVExporter();
-//            CsvExport.export(outputStream, workbook.execute(parameterMap, new WriteActor()));
-//            //½«½á¹û¹¤×÷±¡µ¼³öÎªSVGÎÄ¼ş
-//            outputStream = new FileOutputStream(new File("/Users//susie//Downloads//SvgExport.svg"));
-//            SVGExporter SvgExport = new SVGExporter();
-//            SvgExport.export(outputStream, workbook.execute(parameterMap, new WriteActor()));
-//            //½«½á¹û¹¤×÷±¡µ¼³öÎªimageÎÄ¼ş
+            //å°†ç»“æœå·¥ä½œè–„å¯¼å‡ºä¸ºimageæ–‡ä»¶
             outputStream = new FileOutputStream(new File("C:\\FTPServer\\PngExport.png"));
             ImageExporter ImageExport = new ImageExporter();
             ImageExport.export(outputStream, re);
