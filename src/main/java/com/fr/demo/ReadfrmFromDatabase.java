@@ -23,14 +23,14 @@ public class ReadfrmFromDatabase extends Formlet {
         Form form= new Form();
         String name = reportletRequest.getParameter("reportname").toString();
         try {
-            // 定义数据连接(根据你实际数据库信息进行修改)
+        	// 瀹氫箟鏁版嵁杩炴帴(鏍规嵁浣犲疄闄呮暟鎹簱淇℃伅杩涜淇敼)
             String driver = "com.mysql.jdbc.Driver";
             String url = "jdbc:mysql://localhost:3306/test";
             String user = "root";
             String pass = "123456";
             Class.forName(driver);
             Connection conn = DriverManager.getConnection(url, user, pass);
-            // 从数据库中读模板
+            // 浠庢暟鎹簱涓妯℃澘
             String sql = "select B from report where A = '" + name
                     + "'";
             Statement smt = conn.createStatement();
