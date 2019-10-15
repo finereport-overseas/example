@@ -1,9 +1,10 @@
 package com.fr.plugin.chart;
 
 import com.fr.chart.chartattr.Chart;
-import com.fr.chart.fun.impl.AbstractIndependentChartProvider;
+import com.fr.chart.fun.impl.AbstractIndependentChartsProvider;
+import com.fr.stable.StringUtils;
 
-public class IndependentChartProviderImpl extends AbstractIndependentChartProvider {
+public class IndependentChartProviderImpl extends AbstractIndependentChartsProvider {
     @Override
     public void init() {
 
@@ -15,12 +16,22 @@ public class IndependentChartProviderImpl extends AbstractIndependentChartProvid
     }
 
     @Override
-    public String getChartName() {
-        return "";
+    public Chart[] getChartTypes() {
+        return null;
     }
 
     @Override
-    public Chart[] getChartTypes() {
-        return null;
+    public String[] getRequiredJS() {
+        return new String[0];
+    }
+
+    @Override
+    public String getWrapperName() {
+        return StringUtils.EMPTY;
+    }
+
+    @Override
+    public int currentAPILevel() {
+        return 0;
     }
 }
