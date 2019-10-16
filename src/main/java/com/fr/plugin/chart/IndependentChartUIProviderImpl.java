@@ -16,6 +16,11 @@ public class IndependentChartUIProviderImpl extends AbstractExtendedChartUIProvi
     }
 
     @Override
+    public String[] getDemoImagePath() {
+        return new String[0];
+    }
+
+    @Override
     public String getIconPath() {
         return "";
     }
