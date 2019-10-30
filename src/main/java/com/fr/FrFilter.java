@@ -81,7 +81,7 @@ public class FrFilter implements Filter {
      */
     private void login(HttpServletRequest req, HttpServletResponse res, HttpSession session, String username) throws Exception {
         String token = LoginService.getInstance().login(req, res, username);
-        session.setAttribute(DecisionServiceConstants.FINE_AUTH_TOKEN_NAME, token);
+        req.setAttribute(DecisionServiceConstants.FINE_AUTH_TOKEN_NAME, token);
         FineLoggerFactory.getLogger().info("fr FrFilter is over with username is ###" + username);
     }
 
