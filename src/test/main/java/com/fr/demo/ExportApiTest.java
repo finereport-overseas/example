@@ -22,7 +22,7 @@ import com.fr.report.worksheet.WorkSheet;
 import com.fr.report.write.WriteActivator;
 import com.fr.scheduler.SchedulerActivator;
 import com.fr.stable.WriteActor;
-import com.fr.store.StateServerActivator;
+import com.fr.store.StateServiceActivator;
 import com.fr.workspace.simple.SimpleWork;
 import com.fr.write.web.excel.ExcelImportPlusProcessor;
 import junit.framework.TestCase;
@@ -43,7 +43,7 @@ public class ExportApiTest extends TestCase {
         Module module = ActivatorToolBox.simpleLink(new BaseDBActivator(),
                 new ConfigurationActivator(),
                 new StandaloneModeActivator(),
-                new StateServerActivator(),
+                new StateServiceActivator(),
                 new ChartBaseActivator(),
                 new SchedulerActivator(),
                 new ReportBaseActivator(),

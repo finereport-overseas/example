@@ -1,8 +1,8 @@
 package com.fr.learn;
 
-import com.fr.start.Designer;
+import com.fr.start.MainDesigner;
 
-public class Leaner extends Designer {
+public class Leaner extends MainDesigner {
 
     static {
         // 这段代码让插件能支持远程设计的时候的调试

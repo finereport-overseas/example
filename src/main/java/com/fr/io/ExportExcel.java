@@ -26,7 +26,7 @@ import com.fr.report.module.ReportBaseActivator;
 import com.fr.report.write.WriteActivator;
 import com.fr.scheduler.SchedulerActivator;
 import com.fr.stable.WriteActor;
-import com.fr.store.StateServerActivator;
+import com.fr.store.StateServiceActivator;
 import com.fr.workspace.simple.SimpleWork;
 
 import java.io.File;
@@ -40,7 +40,7 @@ public class ExportExcel {
         Module module = ActivatorToolBox.simpleLink(new BaseDBActivator(),
                 new ConfigurationActivator(),
                 new StandaloneModeActivator(),
-                new StateServerActivator(),
+                new StateServiceActivator(),
                 new ChartBaseActivator(),
                 new SchedulerActivator(),
                 new ReportBaseActivator(),
