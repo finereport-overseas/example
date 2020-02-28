@@ -8,11 +8,9 @@ import com.fr.config.activator.ConfigurationActivator;
 import com.fr.env.operator.CommonOperatorImpl;
 import com.fr.form.export.FormToWBExecutor;
 import com.fr.general.I18nResource;
-import com.fr.io.TemplateWorkBookIO;
 import com.fr.io.exporter.ImageExporter;
 import com.fr.io.exporter.PDFExporter;
 import com.fr.io.exporter.excel.stream.StreamExcel2007Exporter;
-import com.fr.main.impl.WorkBook;
 import com.fr.main.workbook.ResultWorkBook;
 import com.fr.module.Module;
 import com.fr.module.tool.ActivatorToolBox;
@@ -21,8 +19,7 @@ import com.fr.report.RestrictionActivator;
 import com.fr.report.module.ReportBaseActivator;
 import com.fr.report.write.WriteActivator;
 import com.fr.scheduler.SchedulerActivator;
-import com.fr.stable.WriteActor;
-import com.fr.store.StateServerActivator;
+import com.fr.store.StateServiceActivator;
 import com.fr.workspace.simple.SimpleWork;
 
 import java.io.File;
@@ -34,7 +31,7 @@ public class ExportApi_frm {
         Module module = ActivatorToolBox.simpleLink(new BaseDBActivator(),
                 new ConfigurationActivator(),
                 new StandaloneModeActivator(),
-                new StateServerActivator(),
+                new StateServiceActivator(),
                 new SchedulerActivator(),
                 new ReportBaseActivator(),
                 new RestrictionActivator(),
