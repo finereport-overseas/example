@@ -9,10 +9,6 @@
         <common-version>10.0-RELEASE-SNAPSHOT</common-version>
         <web-inf-bucket>${project.basedir}/webroot/WEB-INF</web-inf-bucket>
     </properties>
-    <modules>
-        <module>demo-file-submit-oss</module>
-        <module>crm-file-manager</module>
-    </modules>
     <dependencies>
         <!-- core包 -->
         <dependency>
