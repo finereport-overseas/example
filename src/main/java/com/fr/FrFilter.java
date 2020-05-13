@@ -55,7 +55,7 @@ public class FrFilter implements Filter {
         try {
             //用户名为空，登录请求有问题，直接报错
             if (StringUtils.isNotEmpty(username)) {
-                FineLoggerFactory.getLogger().error("username:" + username);
+                FineLoggerFactory.getLogger().info("username:" + username);
                 //获取请求携带的token
                 Object oldToken = session.getAttribute(DecisionServiceConstants.FINE_AUTH_TOKEN_NAME);
 
