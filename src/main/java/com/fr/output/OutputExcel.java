@@ -32,14 +32,19 @@ public class OutputExcel extends OutputActionHandler<OutputClass> {
 
     private void output(String path) {
 
-        String realPath = ResourceIOUtils.getRealPath(path);
-        File file = new File(realPath);
-        String newPath = "C:/test/" + file.getName();
-        BufferedInputStream in = null;
+        InputStream in = ResourceIOUtils.read(path);
         OutputStream out = null;
+
+        if (in == null) {
+            // 读文件失败
+            return;
+        }
+
         try {
+            // 写文件到本地磁盘
+            String newPath = "C:/test/" + ResourceIOUtils.getName(path);
             out = new BufferedOutputStream(new FileOutputStream(new File(newPath)));
-            in = new BufferedInputStream(new FileInputStream(realPath));
+            in = new BufferedInputStream(in);
             byte[] ba = new byte[in.available()];
             in.read(ba);
             out.write(ba);
@@ -47,9 +52,7 @@ public class OutputExcel extends OutputActionHandler<OutputClass> {
             e.printStackTrace();
         } finally {
             try {
-                if (in != null) {
-                    in.close();
-                }
+                in.close();
                 if (out != null) {
                     out.close();
                 }
