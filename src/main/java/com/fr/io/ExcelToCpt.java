@@ -7,6 +7,7 @@ import com.fr.config.activator.BaseDBActivator;
 import com.fr.config.activator.ConfigurationActivator;
 import com.fr.env.operator.CommonOperatorImpl;
 import com.fr.general.I18nResource;
+import com.fr.health.activator.ModuleHealActivator;
 import com.fr.io.importer.Excel2007ReportImporter;
 import com.fr.main.TemplateWorkBook;
 import com.fr.main.impl.WorkBook;
@@ -32,6 +33,7 @@ public class ExcelToCpt {
         Module module = ActivatorToolBox.simpleLink(new BaseDBActivator(),
                 new ConfigurationActivator(),
                 new StandaloneModeActivator(),
+                new ModuleHealActivator(),
                 new StateServiceActivator(),
                 new ChartBaseActivator(),
                 new SchedulerActivator(),
