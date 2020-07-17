@@ -9,6 +9,7 @@ import com.fr.config.activator.ConfigurationActivator;
 import com.fr.env.operator.CommonOperatorImpl;
 import com.fr.general.Background;
 import com.fr.general.I18nResource;
+import com.fr.health.activator.ModuleHealActivator;
 import com.fr.io.exporter.EmbeddedTableDataExporter;
 import com.fr.main.impl.WorkBook;
 import com.fr.main.parameter.ReportParameterAttr;
@@ -33,6 +34,7 @@ public class SetParameterWindow {
             Module module = ActivatorToolBox.simpleLink(new BaseDBActivator(),
                     new ConfigurationActivator(),
                     new StandaloneModeActivator(),
+                    new ModuleHealActivator(),
                     new StateServiceActivator(),
                     new ChartBaseActivator(),
                     new SchedulerActivator(),

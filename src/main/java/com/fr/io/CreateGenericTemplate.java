@@ -11,6 +11,7 @@ import com.fr.data.impl.NameDatabaseConnection;
 import com.fr.env.operator.CommonOperatorImpl;
 import com.fr.general.I18nResource;
 import com.fr.general.data.TableDataColumn;
+import com.fr.health.activator.ModuleHealActivator;
 import com.fr.main.impl.WorkBook;
 import com.fr.module.Module;
 import com.fr.module.tool.ActivatorToolBox;
@@ -37,6 +38,7 @@ public class CreateGenericTemplate {
         Module module = ActivatorToolBox.simpleLink(new BaseDBActivator(),
                 new ConfigurationActivator(),
                 new StandaloneModeActivator(),
+                new ModuleHealActivator(),
                 new StateServiceActivator(),
                 new ChartBaseActivator(),
                 new SchedulerActivator(),

@@ -8,6 +8,7 @@ import com.fr.config.activator.ConfigurationActivator;
 import com.fr.env.operator.CommonOperatorImpl;
 import com.fr.form.export.FormToWBExecutor;
 import com.fr.general.I18nResource;
+import com.fr.health.activator.ModuleHealActivator;
 import com.fr.io.exporter.ImageExporter;
 import com.fr.io.exporter.PDFExporter;
 import com.fr.io.exporter.excel.stream.StreamExcel2007Exporter;
@@ -31,6 +32,7 @@ public class ExportApi_frm {
         Module module = ActivatorToolBox.simpleLink(new BaseDBActivator(),
                 new ConfigurationActivator(),
                 new StandaloneModeActivator(),
+                new ModuleHealActivator(),
                 new StateServiceActivator(),
                 new SchedulerActivator(),
                 new ReportBaseActivator(),

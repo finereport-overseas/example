@@ -43,6 +43,7 @@ public class ExportApiTest extends TestCase {
         Module module = ActivatorToolBox.simpleLink(new BaseDBActivator(),
                 new ConfigurationActivator(),
                 new StandaloneModeActivator(),
+                new ModuleHealActivator(),
                 new StateServiceActivator(),
                 new ChartBaseActivator(),
                 new SchedulerActivator(),
