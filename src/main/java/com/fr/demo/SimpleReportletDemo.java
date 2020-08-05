@@ -10,12 +10,11 @@ import java.util.Map;
 
 public class SimpleReportletDemo extends Reportlet {
     public TemplateWorkBook createReport(ReportletRequest reportletrequest) {
-        //新建一个WorkBook对象，用于保存最终返回的报表
-
+        // Create a new WorkBook.
         TemplateWorkBook WorkBook = null;
         try {
-            //读取模板，将模板保存为workbook对象并返回  
-            WorkBook = TemplateWorkBookIO.readTemplateWorkBook("//doc//Primary//Parameter//Parameter.cpt");
+            // Read the template from the path and store it as a Workbook.
+            WorkBook = TemplateWorkBookIO.readTemplateWorkBook("//doc-EN//Primary//Parameter//Parameter_Reference.cpt");
         } catch (Exception e) {
             e.getStackTrace();
         }

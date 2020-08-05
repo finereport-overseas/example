@@ -2,13 +2,13 @@ package com.fr.data;
 
 public class ArrayTableDataDemo extends AbstractTableData {
     /**
-     * 定义程序数据集的列名与数据保存位置
+     * Define a String array for column names and a two-dimensional array to store data
      */
     private String[] columnNames;
     private Object[][] rowData;
 
     /**
-     * 实现构建函数，在构建函数中准备数据
+     * Prepare data in the constructor.
      */
     public ArrayTableDataDemo() {
         String[] columnNames = {"Name", "Score"};
@@ -18,7 +18,7 @@ public class ArrayTableDataDemo extends AbstractTableData {
         this.rowData = datas;
     }
 
-    //实现ArrayTableData的其他四个方法，因为AbstractTableData已经实现了hasRow方法
+    // Since hasRow() has been implemented in AbstractTableData, here we only need to implement the other four functions.
 
     @Override
     public int getColumnCount() {

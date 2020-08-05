@@ -33,8 +33,8 @@ import java.util.HashMap;
 
 public class CreateGenericTemplate {
     public static void main(String[] args) throws Exception {
-        // 首先需要定义执行所在的环境，这样才能正确读取数据库信息
-        // 定义报表运行环境,用于执行报表
+        // the execution environment needs to be defined beforehand in order to read the database correctly
+        // define the environment to execute the report
         Module module = ActivatorToolBox.simpleLink(new BaseDBActivator(),
                 new ConfigurationActivator(),
                 new StandaloneModeActivator(),
@@ -47,44 +47,44 @@ public class CreateGenericTemplate {
                 new ReportActivator(),
                 new WriteActivator());
         SimpleWork.supply(CommonOperator.class, new CommonOperatorImpl());
-        String envpath = "//Applications//FineReport10_325//webapps//webroot//WEB-INF";//工程路径
+        String envpath = "//Applications//FineReport10_325//webapps//webroot//WEB-INF";//project path
         SimpleWork.checkIn(envpath);
         I18nResource.getInstance();
         module.start();
 
 
         WorkBook wb = new WorkBook();
-        //添加新的模板数据集
+        //add new datasets
         TableData td = genericTableData("FRDemo", "SELECT * FROM Equipment");
-        wb.putTableData("公司信息", td);
-        //创建第一个report 也就是sheet页
+        wb.putTableData("company information", td);
+        //create the first report,which is worksheet
         WorkSheet report = new WorkSheet();
         wb.addReport(report);
-        //数据库暂时先不读，弄点假数据
+        //database reading is suspended for now and  "fake" some temporary data
         HashMap<Integer, String> map = new HashMap<Integer, String>();
         map.put(0, "Company");
         map.put(1, "Tel");
-        //添加列头
-        DefaultTemplateCellElement title = genericCell(0, 0, null, "这是标题");
+        //add colum head
+        DefaultTemplateCellElement title = genericCell(0, 0, null, "this is title");
         title.setRowSpan(2);
         title.setColumnSpan(2);
         report.addCellElement(title);
-        //添加数据列
+        //add data column
         for (Integer key : map.keySet()) {
             TemplateCellElement cellHeaer = genericCell(2, key, null, map.get(key));
             report.addCellElement(cellHeaer);
             TemplateCellElement cell = genericCell(3, key, "公司信息", map.get(key));
             report.addCellElement(cell);
         }
-        //导出模板
+        // export the template
         FileOutputStream outputStream = new FileOutputStream(new File("//Users//susie//Downloads//company.cpt"));
         wb.export(outputStream);
         outputStream.close();
         module.stop();
         System.out.println("finished");
     }
-    /*
-     *生成TableData
+    /**
+     * generates Table Data
      */
     private static TableData genericTableData(String conString, String sqlQuery) {
         NameDatabaseConnection database = new NameDatabaseConnection(conString);
@@ -92,11 +92,11 @@ public class CreateGenericTemplate {
         return td;
     }
     /**
-     * 添加单元格
-     * row 行号
-     * column 列号
-     * dsName 数据集名称 如 ds1
-     * 数据列名称如 ds1中的id列，则输入 id
+     *  add cells
+     * row (row number)
+     * column (column number)
+     * dsName (dataset name such as ds1)
+     * data column name such as id column in ds1, simply type in id
      */
     private static DefaultTemplateCellElement genericCell(int row, int column, String dsName, String columnName) {
         DefaultTemplateCellElement dtCell = new DefaultTemplateCellElement(row, column);
@@ -111,4 +111,3 @@ public class CreateGenericTemplate {
         return dtCell;
     }
 }
-//自动执行存储过程，从里面获取结果集结的部分等研究一下jdbc再补

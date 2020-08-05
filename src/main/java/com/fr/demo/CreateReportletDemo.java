@@ -1,4 +1,3 @@
-//创建程序报表
 package com.fr.demo;
 
 import com.fr.base.Style;
@@ -18,21 +17,25 @@ public class CreateReportletDemo extends Reportlet
 {
     public TemplateWorkBook createReport(ReportletRequest arg0)
     {
-        //创建一个WorkBook工作薄，在工作薄中插入一个WorkSheet
+        // Create a workbook and a worksheet.
         WorkBook workbook = new WorkBook();
         WorkSheet sheet1 = new WorkSheet();
 
+        // Create a cell element.
         TemplateCellElement CellA1 = new DefaultTemplateCellElement(0, 0,
                 "FineReport");
-        Style style = Style.getInstance();
 
+        Style style = Style.getInstance();
         FRFont frfont = FRFont.getInstance("Arial", 1, 20.0F, Color.red);
         style = style.deriveFRFont(frfont);
         CellA1.setStyle(style);
-        sheet1.addCellElement(CellA1);
 
+        // Add the cell to the worksheet.
+        sheet1.addCellElement(CellA1);
         sheet1.setColumnWidth(0, new OLDPIX(150.0F));
         sheet1.setRowHeight(1, new OLDPIX(35.0F));
+
+        // Add the worksheet to the workbook.
         workbook.addReport(sheet1);
         return workbook;
     }
