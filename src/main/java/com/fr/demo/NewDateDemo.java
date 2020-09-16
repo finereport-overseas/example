@@ -1,4 +1,4 @@
-//动态修改数据
+//modify data dynamically
 package com.fr.demo;
 
 import com.fr.data.ArrayTableDataDemo;
@@ -17,10 +17,10 @@ public class NewDateDemo extends Reportlet {
 
         ModuleContext.startModule(EngineModule.class.getName());
         try {
-            //创建workbook对象，将模板保存为workbook对象并返回    
+            //Create workbook and save the template as workbook and returns   
             workbook = TemplateWorkBookIO.readTemplateWorkBook("1.cpt");
-            ArrayTableDataDemo a = new ArrayTableDataDemo(); //调用定义的程序数据集连接     
-            workbook.putTableData("ds2", a); //给模板赋新的数据集
+            ArrayTableDataDemo a = new ArrayTableDataDemo(); //connect with defined class dataset   
+            workbook.putTableData("ds2", a); //assign new dataset to the template
         } catch (Exception e) {
             e.getStackTrace();
         }
