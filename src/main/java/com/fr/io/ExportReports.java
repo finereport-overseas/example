@@ -31,8 +31,8 @@ import java.io.OutputStream;
 
 public class ExportReports {
     public static void main(String[] args) {
-        // 首先需要定义执行所在的环境，这样才能正确读取数据库信息
-        // 定义报表运行环境,用于执行报表
+        // first define the environment to read the database info correctly
+        // define environment to execute the report
         Module module = ActivatorToolBox.simpleLink(new BaseDBActivator(),
                 new ConfigurationActivator(),
                 new StandaloneModeActivator(),
@@ -45,34 +45,34 @@ public class ExportReports {
                 new ReportActivator(),
                 new WriteActivator());
         SimpleWork.supply(CommonOperator.class, new CommonOperatorImpl());
-        String envpath = "//Applications//FineReport10_325//webapps//webroot//WEB-INF";//工程路径
+        String envpath = "//Applications//FineReport10_325//webapps//webroot//WEB-INF";//env path
         SimpleWork.checkIn(envpath);
         I18nResource.getInstance();
         module.start();
 
 
-        // 进行程序的一些必要初始化
+        // some essential initialization
         try {
-            // 未执行模板工作薄
+            //workbook to be executed
             TemplateWorkBook workbook = TemplateWorkBookIO.readTemplateWorkBook(
                     "Gettingstarted.cpt");
-            // 参数值为China计算结果，将结果保存至rworkbook
+            // get the result where parameter value is East China，save the result to rworkbook
             Parameter[] parameters = workbook.getParameters();
             java.util.Map parameterMap = new java.util.HashMap();
             for (int i = 0; i < parameters.length; i++) {
-                parameterMap.put(parameters[i].getName(), "华东");
+                parameterMap.put(parameters[i].getName(), "East China");
             }
             PageWorkBook rworkbook = (PageWorkBook)workbook.execute(parameterMap,new PageActor());
-            rworkbook.setReportName(0, "华东");
-            // 清空parametermap，将参数值改为华北,计算后获得ResultReport
+            rworkbook.setReportName(0, "East China");
+            // clear parametermap，change the parameter value to North China and get ResultReport
             parameterMap.clear();
             for (int i = 0; i < parameters.length; i++) {
-                parameterMap.put(parameters[i].getName(), "华北");
+                parameterMap.put(parameters[i].getName(), "North China");
             }
             PageWorkBook rworkbook2 = (PageWorkBook)workbook.execute(parameterMap,new PageActor());
             PageReport rreport2 = rworkbook2.getPageReport(0);
-            rworkbook.addReport("华北", rreport2);
-            // 将结果工作薄导出为Excel文件
+            rworkbook.addReport("North China", rreport2);
+            //Export Resultbook as Excel
             OutputStream outputStream = new FileOutputStream(new File("//Users//susie//Downloads//ExcelExport1.xls"));
             PageExcelExporter excelExport = new PageExcelExporter(ReportUtils.getPaperSettingListFromWorkBook(rworkbook));
             excelExport.export(outputStream, rworkbook);
