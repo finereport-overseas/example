@@ -73,7 +73,7 @@ public class CreateGenericTemplate {
         for (Integer key : map.keySet()) {
             TemplateCellElement cellHeaer = genericCell(2, key, null, map.get(key));
             report.addCellElement(cellHeaer);
-            TemplateCellElement cell = genericCell(3, key, "公司信息", map.get(key));
+            TemplateCellElement cell = genericCell(3, key, "company information", map.get(key));
             report.addCellElement(cell);
         }
         // export the template
