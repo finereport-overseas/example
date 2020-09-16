@@ -29,7 +29,7 @@ public class FlagHtmlColor extends AbstractFunction {
         String endhtml="</font>";
         StringBuffer sb=new StringBuffer();
         int len=txt.length();
-        if("N".equalsIgnoreCase(flag)){//数字
+        if("N".equalsIgnoreCase(flag)){//number
             for(int i=0;i<len;i++){
                 char c=txt.charAt(i);
                 if(c>='0'&&c<='9'){
@@ -39,7 +39,7 @@ public class FlagHtmlColor extends AbstractFunction {
                     sb.append(c);
                 }
             }
-        }else if("C".equalsIgnoreCase(flag)){//字母
+        }else if("C".equalsIgnoreCase(flag)){//letter
             for(int i=0;i<len;i++){
                 char c=txt.charAt(i);
                 if((c>='a'&&c<='z')||(c>='A'&&c<='Z')){
@@ -49,7 +49,7 @@ public class FlagHtmlColor extends AbstractFunction {
                     sb.append(c);
                 }
             }
-        } else if("Z".equalsIgnoreCase(flag)){//中文
+        } else if("Z".equalsIgnoreCase(flag)){//character
             for(int i=0;i<len;i++){
                 char c=txt.charAt(i);
                 if(c >= 0x4E00 &&  c <= 0x9FA5){
