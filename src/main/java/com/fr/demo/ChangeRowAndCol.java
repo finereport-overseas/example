@@ -1,4 +1,4 @@
-//遍历单元格
+//traverse the cell
 package com.fr.demo;
 
 import com.fr.io.TemplateWorkBookIO;
@@ -14,43 +14,43 @@ import java.util.Map;
 
 public class ChangeRowAndCol extends Reportlet {
     public TemplateWorkBook createReport(ReportletRequest reportletrequest) {
-        // 定义最终需要返回的WorkBook对象  
+        // define the workbook
         TemplateWorkBook workbook = null;
         WorkSheet newworksheet = new WorkSheet();
         String change = "0";
         try {
-            // 读取模板保存为WorkBook对象  
+            // read the template and save as workbook
             workbook = TemplateWorkBookIO.readTemplateWorkBook("//doc//Primary//GroupReport//Group.cpt");
-            // 读取请求中的参数判断是否需要切换行列显示，0表示不切换，1表示切换  
+            // read the parameters to decide whether row and column need to switch, 0 means no 1 means yes
             if (reportletrequest.getParameter("change") != null) {
                 change = reportletrequest.getParameter("change").toString();
             }
             if (change.equals("1")) {
-                // 获得单元格需要首先获得单元格所在的报表  
+                // get the report before getting the cell
                 TemplateElementCase report = (TemplateElementCase) workbook
                         .getTemplateReport(0);
-                // 遍历单元格  
+                // traverse the cell
                 int col = 0, row = 0;
                 byte direction = 0;
                 java.util.Iterator it = report.cellIterator();
                 while (it.hasNext()) {
                     TemplateCellElement cell = (TemplateCellElement) it.next();
-                    // 获取单元格的行号与列号并互换  
+                    // get the row and column and then switch
                     col = cell.getColumn();
                     row = cell.getRow();
                     cell.setColumn(row);
                     cell.setRow(col);
-                    // 获取原单元格的扩展方向，0表示纵向扩展，1表示横向扩展  
+                    // get the expanding direction, 0 means vertical , 1 means horizontal 
                     direction = cell.getCellExpandAttr().getDirection();
                     if (direction == 0) {
                         cell.getCellExpandAttr().setDirection((byte) 1);
                     } else if (direction == 1) {
                         cell.getCellExpandAttr().setDirection((byte) 0);
                     }
-                    // 将改变后的单元格添加进新的WorkSheet中  
+                    // add the changed cell to the new worksheet
                     newworksheet.addCellElement(cell);
                 }
-                // 替换原sheet  
+                // replace the original sheet 
                 workbook.setReport(0, newworksheet);
             }
         } catch (Exception e) {
