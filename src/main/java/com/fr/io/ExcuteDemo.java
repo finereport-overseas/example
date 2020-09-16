@@ -29,8 +29,8 @@ import java.io.FileOutputStream;
 public class ExcuteDemo {
     public static void main(String[] args) {
         try {
-            // 首先需要定义执行所在的环境，这样才能正确读取数据库信息
-            // 定义报表运行环境,用于执行报表
+            // the execution environment needs to be defined beforehand in order to read the database correctly
+            // define the environment to execute the report
             Module module = ActivatorToolBox.simpleLink(new BaseDBActivator(),
                     new ConfigurationActivator(),
                     new StandaloneModeActivator(),
@@ -43,24 +43,24 @@ public class ExcuteDemo {
                     new ReportActivator(),
                     new WriteActivator());
             SimpleWork.supply(CommonOperator.class, new CommonOperatorImpl());
-            String envpath = "//Applications//FineReport10_325//webapps//webroot//WEB-INF";//工程路径
+            String envpath = "//Applications//FineReport10_325//webapps//webroot//WEB-INF";//env path
             SimpleWork.checkIn(envpath);
             I18nResource.getInstance();
             module.start();
 
 
-            // 读取模板
+            // read the template
             TemplateWorkBook workbook = TemplateWorkBookIO.readTemplateWorkBook("//doc//Primary//Parameter//Parameter.cpt");
             /*
-             * 生成参数map，注入参数与对应的值，用于执行报表 该模板中只有一个参数地区，给其赋值华北
-             * 若参数在发送请求时传过来，可以通过req.getParameter(name)获得
-             * 获得的参数put进map中，paraMap.put(paraname,paravalue)
+             * generate parameter map and pass parameter and its corresponding value to execute the report.There is only one region parameter. Assign the value to be North China
+             * if the parameter passed during sending the request,it can be obtained by req.getParameter(name)
+             * put the parameter in the map，paraMap.put(paraname,paravalue)
              */
             java.util.Map paraMap = new java.util.HashMap();
-            paraMap.put("地区", "华北");
-            // 使用paraMap执行生成结果
+            paraMap.put("Region", "North China");
+            // use paraMap to execute and generate results
             ResultWorkBook result = workbook.execute(paraMap, new WriteActor());
-            // 使用结果如导出至excel
+            // use the result such as exporting to excel
             FileOutputStream outputStream = new FileOutputStream(new File(
                     "//Users//susie//Downloads//Parameter.xls"));
             ExcelExporter excelExporter = new ExcelExporter();
