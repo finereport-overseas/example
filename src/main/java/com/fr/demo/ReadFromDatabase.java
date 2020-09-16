@@ -21,20 +21,20 @@ public class ReadFromDatabase extends Reportlet {
         WorkBook workbook = new WorkBook();
         String name = reportletRequest.getParameter("cptname").toString();
         try {
-            // 定义数据连接(根据你实际数据库信息进行修改)
+            // define data connection (modify according to actual database info)
             String driver = "com.mysql.jdbc.Driver";
             String url = "jdbc:mysql://review.finedevelop.com:3306/susie";
             String user = "root";
             String pass = "ilovejava";
             Class.forName(driver);
             Connection conn = DriverManager.getConnection(url, user, pass);
-            // 从数据库中读模板
+            // read templates from database
             String sql = "select cpt from report where cptname = '" + name
                     + "'";
             Statement smt = conn.createStatement();
             ResultSet rs = smt.executeQuery(sql);
             while (rs.next()) {
-                Blob blob = rs.getBlob(1); // 取第一列的值，即cpt列
+                Blob blob = rs.getBlob(1); // read the value of the first column,which is cpt column
                 FineLoggerFactory.getLogger().info(blob.toString());
                 InputStream ins = blob.getBinaryStream();
                 workbook.readStream(ins);
