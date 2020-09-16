@@ -29,8 +29,8 @@ import java.io.FileOutputStream;
 
 public class SimpleDemo {
     public static void main(String[] args) {
-        // 首先需要定义执行所在的环境，这样才能正确读取数据库信息
-        // 定义报表运行环境,用于执行报表
+        // the execution environment needs to be defined beforehand in order to read the database correctly
+        // define the environment to execute the report
         Module module = ActivatorToolBox.simpleLink(new BaseDBActivator(),
                 new ConfigurationActivator(),
                 new StandaloneModeActivator(),
@@ -43,7 +43,7 @@ public class SimpleDemo {
                 new ReportActivator(),
                 new WriteActivator());
         SimpleWork.supply(CommonOperator.class, new CommonOperatorImpl());
-        String envpath = "//Applications//FineReport10_325//webapps//webroot//WEB-INF";//工程路径
+        String envpath = "//Applications//FineReport10_325//webapps//webroot//WEB-INF";//env path
         SimpleWork.checkIn(envpath);
         I18nResource.getInstance();
         module.start();
@@ -54,18 +54,18 @@ public class SimpleDemo {
                     .readTemplateWorkBook(
                             "//doc//Primary//Parameter//Parameter.cpt");
 
-            // 获得WorkBook中的WorkSheet，进而修改A1单元格的前景色为红色
+            // get the worksheet in the workbook, modify the front background to be red
             TemplateElementCase report = (TemplateElementCase) workbook
                     .getReport(0);
             // getCellElement(int column, int
-            // row),column和row都从0开始，因此A1单元格便是第0列第0行
+            // row),column和row both start from 0，thus A1 ia Column 0, Row 0
             CellElement cellA1 = report.getCellElement(0, 0);
             FRFont frFont = FRFont.getInstance();
             frFont = frFont.applyForeground(Color.red);
             Style style = Style.getInstance();
             style = style.deriveFRFont(frFont);
             cellA1.setStyle(style);
-            // 保存模板
+            // save the template
             FileOutputStream outputStream = new FileOutputStream(new File(
                     "/Users//susie//Downloads//newParameter1.cpt"));
             ((WorkBook) workbook).export(outputStream);
