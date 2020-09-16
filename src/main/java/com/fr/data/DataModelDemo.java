@@ -9,7 +9,7 @@ public class DataModelDemo extends AbstractTableData {
         String[] columnNames = { "Name", "Score" };
         this.columnNames = columnNames;
     }
-    // 实现其他四个方法
+    // implement the other four methods
     public int getColumnCount() {
         return columnNames.length;
     }
@@ -24,13 +24,13 @@ public class DataModelDemo extends AbstractTableData {
         init();
         return ((Object[]) valueList.get(rowIndex))[columnIndex];
     }
-    // 准备数据
+    // get the data ready
     public void init() {
-        // 确保只被执行一次
+        // make sure it's only be executed once
         if (valueList != null) {
             return;
         }
-        // 保存得到的结果集
+        // save the result set
         valueList = new ArrayList();
         Context ctx = null;
         Account ac = null;
@@ -44,7 +44,7 @@ public class DataModelDemo extends AbstractTableData {
             double balanceGreaterThan = 100;
             Collection col = home.findBigAccounts(balanceGreaterThan);
             if (col != null) {
-                // 用对象保存数据
+                // save data with objects
                 Object[] objArray = null;
                 Iterator iter = col.iterator();
                 while (iter.hasNext()) {
@@ -52,7 +52,7 @@ public class DataModelDemo extends AbstractTableData {
                     objArray = new Object[2];
                     objArray[0] = bigAccount.getPrimaryKey();
                     objArray[1] = new Double(bigAccount.balance());
-                    // 在valueList中加入这一行数据
+                    //  add the data in objArray to valuelist 
                     valueList.add(objArray);
                 }
             }
