@@ -78,7 +78,7 @@ public class XMLRead extends AbstractTableData {
     public Connection getConncetion() {
         // change to your own connection configuration
         String driverName = "com.mysql.jdbc.Driver";
-        String url = "jdbc:mysql://122.112.183.57:3306/joe";
+        String url = "jdbc:mysql://localhost:3306/joe";
         String username = "joe";
         String password = "123456";
         Connection con = null;
