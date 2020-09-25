@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.io.StringBufferInputStream;
 
 public class XMLRead extends AbstractTableData {
-    // 列名数组，保存程序数据集所有列名
+    // the column names
     private String[] columnNames = { "id", "name", "MemoryFreeSize",
             "MemoryTotalSize", "MemoryUsage" };
-    // 保存表数据
+    // to save the data
     private ArrayList valueList = null;
 
     public int getColumnCount() {
@@ -34,7 +34,7 @@ public class XMLRead extends AbstractTableData {
     }
 
     private void init() {
-        // 确保只被执行一次
+        // make sure no more repeated running
         if (valueList != null) {
             return;
         }
@@ -45,25 +45,28 @@ public class XMLRead extends AbstractTableData {
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
-            // 用对象保存数据
+            // store data with objects
             Object[] objArray = null;
             while (rs.next()) {
                 objArray = new Object[5];
                 String[] xmldata = null;
+                // ID
                 objArray[0] = rs.getObject(1);
+                // NAME
                 objArray[1] = rs.getObject(2);
+                // add a parent node
                 InputStream in = new StringBufferInputStream("<demo>"
                         + rs.getObject(3).toString() + "</demo>");
-                GetXmlDate getxmldata = new GetXmlDate();
-                // 对xml流进行解析，返回的为name对应的value值数组
+                GetXmlData getxmldata = new GetXmlData();
+                // read the xml stream and return the value array
                 xmldata = getxmldata.readerXMLSource(in, name);
-                // 将解析后的值存于最终结果ArrayList中
+                // store the value in valueList
                 objArray[2] = xmldata[0];
                 objArray[3] = xmldata[1];
                 objArray[4] = xmldata[2];
                 valueList.add(objArray);
             }
-            // 释放数据源
+            // release the data source
             rs.close();
             stmt.close();
             conn.close();
@@ -73,10 +76,11 @@ public class XMLRead extends AbstractTableData {
     }
 
     public Connection getConncetion() {
+        // change to your own connection configuration
         String driverName = "com.mysql.jdbc.Driver";
-        String url = "jdbc:mysql://review.finedevelop.com:3306/susie";
-        String username = "root";
-        String password = "ilovejava";
+        String url = "jdbc:mysql://122.112.183.57:3306/joe";
+        String username = "joe";
+        String password = "123456";
         Connection con = null;
 
         try {
@@ -90,7 +94,6 @@ public class XMLRead extends AbstractTableData {
 
     }
 
-    // 释放一些资源，因为可能会有重复调用，所以需释放valueList，将上次查询的结果释放掉
     public void release() throws Exception {
         super.release();
         this.valueList = null;

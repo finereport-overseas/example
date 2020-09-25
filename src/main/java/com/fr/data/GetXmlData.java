@@ -12,11 +12,11 @@ import java.io.Reader;
  */
 public class GetXmlData {
     /**
-     * 定义返回值数组
+     * the return value String
      */
     private String[] value = new String[3];
     /**
-     * 定义查询的name值
+     * the name array to query
      */
     private String[] name = null;
 
@@ -43,7 +43,7 @@ public class GetXmlData {
                 if ("Field".equals(reader.getTagName())) {
                     Field field = new Field();
                     reader.readXMLObject(field);
-                    // 获得name对应的value值
+                    // get its value according to the name
                     if (name[0].equals(field.name)) {
                         value[0] = field.value;
                     } else if (name[1].equals(field.name)) {
@@ -57,7 +57,7 @@ public class GetXmlData {
     }
 
     /**
-     * 定义每个field的结构
+     * the structure of every field
      */
     private class Field implements XMLReadable {
         private String name;
@@ -68,11 +68,11 @@ public class GetXmlData {
         public void readXML(XMLableReader reader) {
             if (reader.isChildNode()) {
                 String tagName = reader.getTagName();
-                if ("name".equals(tagName)) {
+                if ("Name".equals(tagName)) {
                     this.name = reader.getElementValue();
                 } else if ("Type".equals(tagName)) {
                     this.type = reader.getElementValue();
-                } else if ("value".equals(tagName)) {
+                } else if ("Value".equals(tagName)) {
                     this.value = reader.getElementValue();
                 }
             }
