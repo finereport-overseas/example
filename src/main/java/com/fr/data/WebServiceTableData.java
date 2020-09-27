@@ -1,6 +1,8 @@
 package com.fr.data;
 
 import javax.xml.namespace.QName;
+
+import org.apache.axis.AxisProperties;
 import org.apache.axis.client.Call;
 import org.apache.axis.client.Service;
 import com.fr.data.AbstractTableData;
@@ -13,33 +15,34 @@ public class WebServiceTableData extends AbstractTableData{
         this.data = this.createData();
     }
 
-    //获取列数
     public int getColumnCount() throws TableDataException {
         return data[0].length;
     }
 
-    //获取列的名称为数组中第一行的值
+    // The column names are the value of first row
     public String getColumnName(int columnIndex) throws TableDataException {
         return data[0][columnIndex];
     }
 
-    //获取行数为数据的长度-1
+    // the number of data row
     public int getRowCount() throws TableDataException {
         return data.length - 1;
     }
 
-    //获取值
+    // get value
     public Object getValueAt(int rowIndex, int columnIndex) {
         return data[rowIndex + 1][columnIndex];
     }
 
     public String[][] createData() {
         try {
-            String endpoint = "http://localhost:8080/axis/TestWS2TDClient.jws";
+            // ignore ssl verification
+            AxisProperties.setProperty("axis.socketSecureFactory",  "org.apache.axis.components.net.SunFakeTrustSocketFactory");
+            String endpoint = "https://localhost:8443/axis/TestWS2TDClient.jws";
             Service service = new Service();
             Call call = (Call) service.createCall();
             call.setTargetEndpointAddress(new java.net.URL(endpoint));
-            call.setOperationName(new QName("http://localhost:8080/axis/TestWS2TDClient.jws",
+            call.setOperationName(new QName("https://localhost:8443/axis/TestWS2TDClient.jws",
                     "getTD"));
             String[][] ret = (String[][])call.invoke(new Object[] {});
             return ret;

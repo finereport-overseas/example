@@ -1,8 +1,8 @@
 public class TestWS2TDClient {
     public String[][] getTD() {
-        String[][] a = { { "城市", "销售员", "销售额" }, { "江苏", "Anna", "230" }, { "江苏", "Alex", "190" },
+        String[][] a = { { "City", "Salesperson", "Sales Volume" }, { "Los Angeles", "Anna", "230" }, { "Los Angeles", "Alex", "190" },
 
-                { "江苏", "Jack", "320" }, { "江苏", "Apple", "210" }, { "浙江", "Faye", "150" }, { "浙江", "Sammi", "280" } };
+                { "Los Angeles", "Jack", "320" }, { "Los Angeles", "Apple", "210" }, { "San Fransisco", "Faye", "150" }, { "San Fransisco", "Sammy", "280" } };
         return a;
     }
 }
