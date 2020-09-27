@@ -27,19 +27,19 @@ public class WebServiceWSDLDataDemo extends AbstractTableData {
     public int getColumnCount() throws TableDataException {
         return data[0].length;
     }
-    // 获取列的名称为数组中第一行的值
+
     public String getColumnName(int columnIndex) throws TableDataException {
         return data[0][columnIndex];
     }
-    // 获取行数为数据的长度-1
+
     public int getRowCount() throws TableDataException {
         return data.length - 1;
     }
-    // 获取值
+
     public Object getValueAt(int rowIndex, int columnIndex) {
         return data[rowIndex + 1][columnIndex];
     }
-    // 取数
+
     private static String[][] getResults(OMElement element) {
         if (element == null) {
             return null;
@@ -57,7 +57,7 @@ public class WebServiceWSDLDataDemo extends AbstractTableData {
             }
         }
         String[] result1 = list.toArray(new String[list.size()]);
-        String results[][] = new String[result1.length][2]; // 这里的列数根据自己取出的列数而定，行数当然是有多少取多少
+        String results[][] = new String[result1.length][2]; // the column number depends on your own
         String b1, b2;
         for (int i = 0; i < result1.length; i++) {
             if (result1[i].length() != 0) {
@@ -69,25 +69,25 @@ public class WebServiceWSDLDataDemo extends AbstractTableData {
         }
         return results;
     }
-    // 获取连接并取数
+    // get connection and fetch data
     private static String[][] getWSDLData() {
         try {
             String url = "http://localhost:8080/axis2/services/myService?wsdl"; // 这里的url即为发布的WebService具体地址
             EndpointReference targetEPR = new EndpointReference(url);
-// 创建一个OMFactory，下面的namespace、方法与参数均需由它创建
+            // create an OMFactory to create namespace, method and parameters
             OMFactory fac = OMAbstractFactory.getOMFactory();
-// 命名空间namespace
+            // namespace
             OMNamespace omNs = fac.createOMNamespace("http://service", "a");
-// 方法
-            OMElement method = fac.createOMElement("get", omNs); // 对应方法名
-// 参数
+            // method
+            OMElement method = fac.createOMElement("get", omNs);
+            // parameters
             Options options = new Options();
             options.setTo(targetEPR);
             options.setAction("http://service/get");
-// 构建请求
+            // create a request
             ServiceClient sender = new ServiceClient();
             sender.setOptions(options);
-// 发送请求
+            // send the request
             OMElement result1 = sender.sendReceive(method);
             return getResults(result1);
         } catch (org.apache.axis2.AxisFault e) {
@@ -95,7 +95,7 @@ public class WebServiceWSDLDataDemo extends AbstractTableData {
         }
         return null;
     }
-    // 测试
+    // For test
     public static void main(String[] args) {
         String[][] result = getWSDLData();
         if (result != null) {
