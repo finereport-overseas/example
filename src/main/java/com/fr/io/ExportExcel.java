@@ -36,8 +36,7 @@ import java.io.FileOutputStream;
 
 public class ExportExcel {
     public static void main(String[] args) {
-        // 首先需要定义执行所在的环境，这样才能正确读取数据库信息
-        // 定义报表运行环境,用于执行报表
+        // Define the running env to read the database and execute reports.
         Module module = ActivatorToolBox.simpleLink(new BaseDBActivator(),
                 new ConfigurationActivator(),
                 new StandaloneModeActivator(),
@@ -50,7 +49,7 @@ public class ExportExcel {
                 new ReportActivator(),
                 new WriteActivator());
         SimpleWork.supply(CommonOperator.class, new CommonOperatorImpl());
-        String envpath = "//Applications//FineReport10_325//webapps//webroot//WEB-INF";//工程路径
+        String envpath = "//Applications//FineReport10_325//webapps//webroot//WEB-INF";
         SimpleWork.checkIn(envpath);
         I18nResource.getInstance();
         module.start();
@@ -58,57 +57,59 @@ public class ExportExcel {
 
         ResultWorkBook rworkbook = null;
         try {
-            // 未执行模板工作薄
+            // read the workbook
             TemplateWorkBook workbook = TemplateWorkBookIO.readTemplateWorkBook("//doc//Primary//Parameter//Parameter.cpt");
-            // 获取报表参数并设置值，导出内置数据集时数据集会根据参数值查询出结果从而转为内置数据集
+            // get the parameters and set value
             Parameter[] parameters = workbook.getParameters();
             parameters[0].setValue("华东");
-            // 定义parametermap用于执行报表，将执行后的结果工作薄保存为rworkBook
+            // define a parameter map to execute the workbook
             java.util.Map parameterMap = new java.util.HashMap();
             for (int i = 0; i < parameters.length; i++) {
                 parameterMap.put(parameters[i].getName(), parameters[i]
                         .getValue());
             }
-            // 定义输出流
+
             FileOutputStream outputStream;
 
-            //原样导出excel2003
+            // unaltered export to xls
             outputStream = new FileOutputStream(new File("//Users//susie//Downloads//ExcelExport.xls"));
             ExcelExporter excel = new ExcelExporter();
             excel.setVersion(true);
             excel.export(outputStream, workbook.execute(parameterMap,new WriteActor()));
 
-            //原样导出excel2007
+            // unaltered export to xlsx
             outputStream = new FileOutputStream(new File("//Users//susie//Downloads//ExcelExport.xlsx"));
             StreamExcel2007Exporter excel1 = new StreamExcel2007Exporter();
             excel.export(outputStream, workbook.execute(parameterMap,new WriteActor()));
 
-            //分页导出excel2003
+            // full page export to xls
             outputStream = new FileOutputStream(new File("//Users//susie//Downloads//PageExcelExport.xls"));
             PageExcelExporter page = new PageExcelExporter(ReportUtils.getPaperSettingListFromWorkBook(workbook.execute(parameterMap,new WriteActor())));
             page.setVersion(true);
             page.export(outputStream, workbook.execute(parameterMap,new WriteActor()));
 
-            //分页导出excel2007
+            // full page export to xlsx
             outputStream = new FileOutputStream(new File("//Users//susie//Downloads//PageExcelExport.xlsx"));
             PageExcel2007Exporter page1 = new PageExcel2007Exporter(ReportUtils.getPaperSettingListFromWorkBook(rworkbook));
             page1.export(outputStream, workbook.execute(parameterMap,new WriteActor()));
 
-            //分页分sheet导出excel2003
+            // page to sheet export to xls
             outputStream = new FileOutputStream(new File("//Users//susie//Downloads//PageSheetExcelExport.xls"));
             PageToSheetExcelExporter sheet = new PageToSheetExcelExporter(ReportUtils.getPaperSettingListFromWorkBook(workbook.execute(parameterMap,new WriteActor())));
             sheet.setVersion(true);
             sheet.export(outputStream, workbook.execute(parameterMap,new WriteActor()));
 
-            //分页分sheet导出excel2007
+            // page to sheet export to xlsx
             outputStream = new FileOutputStream(new File("//Users//susie//Downloads//PageSheetExcelExport.xlsx"));
             PageToSheetExcel2007Exporter sheet1 = new PageToSheetExcel2007Exporter(ReportUtils.getPaperSettingListFromWorkBook(rworkbook));
             sheet1.export(outputStream, workbook.execute(parameterMap,new WriteActor()));
 
-            //大数据量导出
+            // Large data volume export to xls
             outputStream = new FileOutputStream(new File("//Users//susie//Downloads//LargeExcelExport.zip"));
             LargeDataPageExcelExporter large = new LargeDataPageExcelExporter(ReportUtils.getPaperSettingListFromWorkBook(workbook.execute(parameterMap,new WriteActor())), true);
-            //导出2007版outputStream = new FileOutputStream(new File("//Users//susie//Downloads//LargeExcelExport.xlsx")); excel LargeDataPageExcel2007Exporter large = new LargeDataPageExcel2007Exporter(ReportUtils.getPaperSettingListFromWorkBook(rworkbook), true);
+            // Large data volume export to xlsx
+            // outputStream = new FileOutputStream(new File("//Users//susie//Downloads//LargeExcelExport.xlsx"));
+            // LargeDataPageExcel2007Exporter large = new LargeDataPageExcel2007Exporter(ReportUtils.getPaperSettingListFromWorkBook(rworkbook), true);
             large.export(outputStream, workbook.execute(parameterMap,new WriteActor()));
 
             outputStream.close();
