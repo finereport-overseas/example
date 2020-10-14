@@ -19,7 +19,7 @@ public class ReadFromDatabase extends Reportlet {
     public TemplateWorkBook createReport(ReportletRequest reportletRequest) {
 
         WorkBook workbook = new WorkBook();
-        String name = reportletRequest.getParameter("cptname").toString();
+        String name = reportletRequest.getParameter("reportname").toString();
         try {
             // define data connection (modify according to actual database info)
             String driver = "com.mysql.jdbc.Driver";

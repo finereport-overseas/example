@@ -23,7 +23,7 @@ public class ReadfrmFromDatabase extends Formlet {
         Form form= new Form();
         String name = reportletRequest.getParameter("reportname").toString();
         try {
-        	// 定义数据连接(根据你实际数据库信息进行修改)
+            // define data connection (modify according to actual database info)
             String driver = "com.mysql.jdbc.Driver";
             String url = "jdbc:mysql://localhost:3306/test";
             String user = "root";
