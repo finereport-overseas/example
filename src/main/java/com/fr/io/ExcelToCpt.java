@@ -28,8 +28,6 @@ import java.io.OutputStream;
 
 public class ExcelToCpt {
     public static void main(String[] args) throws Exception {
-        // 首先需要定义执行所在的环境，这样才能正确读取数据库信息
-        // 定义报表运行环境,用于执行报表
         Module module = ActivatorToolBox.simpleLink(new BaseDBActivator(),
                 new ConfigurationActivator(),
                 new StandaloneModeActivator(),
@@ -42,17 +40,18 @@ public class ExcelToCpt {
                 new ReportActivator(),
                 new WriteActivator());
         SimpleWork.supply(CommonOperator.class, new CommonOperatorImpl());
-        String envpath = "//Applications//FineReport10_325//webapps//webroot//WEB-INF";//工程路径
+        String envpath = "//Applications//FineReport10_325//webapps//webroot//WEB-INF";
         SimpleWork.checkIn(envpath);
         I18nResource.getInstance();
         module.start();
 
-
-        File excelFile = new File("//Users//susie//Downloads//aa.xlsx"); // 获取EXCEL文件
+        // get excel file
+        File excelFile = new File("//Users//susie//Downloads//aa.xlsx");
         FileInputStream a = new FileInputStream(excelFile);
 
         TemplateWorkBook tpl = new Excel2007ReportImporter().generateWorkBookByStream(a);
-        OutputStream outputStream = new FileOutputStream(new File("//Users//susie//Downloads//abc.cpt")); // 转换成cpt模板
+        // turn excel into cpt
+        OutputStream outputStream = new FileOutputStream(new File("//Users//susie//Downloads//abc.cpt"));
         ((WorkBook) tpl).export(outputStream);
         outputStream.close();
         module.stop();
