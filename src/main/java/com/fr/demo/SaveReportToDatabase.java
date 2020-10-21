@@ -32,7 +32,6 @@ public class SaveReportToDatabase {
 
     private static void SaveReport() {
         try {
-            // 定义报表运行环境,用于执行报表
             Module module = ActivatorToolBox.simpleLink(new BaseDBActivator(),
                     new ConfigurationActivator(),
                     new StandaloneModeActivator(),
@@ -45,31 +44,31 @@ public class SaveReportToDatabase {
                     new ReportActivator(),
                     new WriteActivator());
             SimpleWork.supply(CommonOperator.class, new CommonOperatorImpl());
-            String envpath = "//Applications//FineReport10_325//webapps//webroot//WEB-INF";//工程路径
+            String envpath = "D:\\FineReport_10.0\\webapps\\webroot\\WEB-INF";
             SimpleWork.checkIn(envpath);
             I18nResource.getInstance();
             module.start();
 
 
-            // 连接数据库
+            // connect to the database
             String driver = "com.mysql.jdbc.Driver";
-            String url = "jdbc:mysql://review.finedevelop.com:3306/susie";
-            String user = "root";
-            String pass = "ilovejava";
+            String url = "jdbc:mysql://localhost:3306/joe";
+            String user = "joe";
+            String pass = "123456";
             Class.forName(driver);
-            Connection conn = DriverManager.getConnection(url, user, pass); //注意表名是否区分大小写
+            Connection conn = DriverManager.getConnection(url, user, pass);
             conn.setAutoCommit(false);
             PreparedStatement presmt = conn
                     .prepareStatement("INSERT INTO report VALUES(?,?)");
 
-            // 读进需要保存入库的模板文件
+            // read the template file to be saved to database
             File cptfile = new File(envpath
-                    + "//reportlets//GettingStarted.cpt");
+                    + "\\reportlets\\GettingStarted.cpt");
             int lens = (int) cptfile.length();
             InputStream ins = new FileInputStream(cptfile);
-            // 将模板保存入库
-            presmt.setString(1, "GettingStarted.cpt"); // 第一个字段存放模板相对路径
-            presmt.setBinaryStream(2, ins, lens); // 第二个字段存放模板文件的二进制流
+            // save the template to the database
+            presmt.setString(1, "GettingStarted.cpt"); // place relative path of the template in Field 1
+            presmt.setBinaryStream(2, ins, lens); // place byte stream of the file in Field 2
             presmt.execute();
             conn.commit();
             presmt.close();
