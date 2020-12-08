@@ -27,7 +27,7 @@ public class IRR extends AbstractFunction {
     }
 
     /**
-     * 将其他类型的数字转换为大数（保证精度）
+     * Transform other type of numbers to BigDecimal
      * @param ele
      * @return
      */
@@ -42,7 +42,7 @@ public class IRR extends AbstractFunction {
     }
 
     /**
-     * 将数组转换为大数数组
+     * Transform an array to a BigDecimal array
      * @param in
      * @return
      */
@@ -75,13 +75,12 @@ public class IRR extends AbstractFunction {
                 maxrate = testrate;
             }
         }
-        //保留16位小数（足够精度）
+        // reach the 16th place after decimal point
         return guess.setScale(16,BigDecimal.ROUND_HALF_UP);
     }
 
-    //最小精度
     private static final BigDecimal Accuracy = new BigDecimal(0.00000001d);
-    //最大循环次数，excel用的是20次，不过精度只到小数点后两位，而且不一定一定能算出值，为了尽可能保证算出结果，我增加到100次，
+    // Maximum times of loop. Excel use 20.
     private static final int Init_Max_Loop = 100;
 
     private static final BigDecimal ZERO = new BigDecimal(0);
@@ -93,7 +92,7 @@ public class IRR extends AbstractFunction {
     private static final int LESS = -1;
 
     /**
-     * 生成一个使NPV为负数的R作为内部收益率下限值
+     * get an R making NPV negative as the floor of IRR
      * @param cashflow
      * @param guess
      * @return
@@ -112,7 +111,7 @@ public class IRR extends AbstractFunction {
     }
 
     /**
-     * 生成一个使NPV为正数的R作为内部收益率的上限制
+     * get an R making NPV positive as the ceiling of IRR
      * @param cashflow
      * @param guess
      * @return
@@ -131,7 +130,7 @@ public class IRR extends AbstractFunction {
     }
 
     /**
-     * 算NPV
+     * Calculate NPV
      * @param cashflow
      * @param rate
      * @return
