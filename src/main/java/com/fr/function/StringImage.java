@@ -1,4 +1,3 @@
-//图片在下文字在上
 package com.fr.function;
 
 import com.fr.base.GraphHelper;
@@ -14,7 +13,7 @@ import java.io.IOException;
 
 
 /**
- * 图片在下文字在上
+ * Text above image
  */
 public class StringImage extends AbstractFunction {
     @Override
