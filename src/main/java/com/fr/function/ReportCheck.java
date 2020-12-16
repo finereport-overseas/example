@@ -1,4 +1,3 @@
-// 自定义函数实现表间校验  
 package com.fr.function;
 
 import com.fr.base.ResultFormula;
@@ -36,13 +35,12 @@ public class ReportCheck extends AbstractFunction {
     private static HashMap wMap = new HashMap();
 
     public Object run(Object[] args) {
-        // 获取公式中的参数  
-        String cptname = args[0].toString(); // 获取报表名称  
-        int colnumber = Integer.parseInt(args[2].toString()); // 所取单元格所在列  
-        int rownumber = Integer.parseInt(args[3].toString()); // 所取单元格所在行  
-        // 定义返回的值  
+        String cptname = args[0].toString(); // get CPT name
+        int colnumber = Integer.parseInt(args[2].toString()); // get the column of the cell
+        int rownumber = Integer.parseInt(args[3].toString()); // get the row of the cell
+        // define the return value
         Object returnValue = null;
-        // 定义报表运行环境,用于执行报表
+        // define the running env to execute report
         Module module = ActivatorToolBox.simpleLink(new BaseDBActivator(),
                 new ConfigurationActivator(),
                 new StandaloneModeActivator(),
@@ -55,7 +53,7 @@ public class ReportCheck extends AbstractFunction {
                 new ReportActivator(),
                 new WriteActivator());
         SimpleWork.supply(CommonOperator.class, new CommonOperatorImpl());
-        String envpath = "//Applications//FineReport10_325//webapps//webroot//WEB-INF";//工程路径
+        String envpath = "D:\\Tools\\apache-tomcat-8.5.57\\webapps\\webroot\\WEB-INF";
         SimpleWork.checkIn(envpath);
         I18nResource.getInstance();
         module.start();
@@ -63,16 +61,14 @@ public class ReportCheck extends AbstractFunction {
 
         try {
             ResultWorkBook rworkbook = null;
-            // 读取模板
+            // read the template
             WorkBook workbook = (WorkBook)TemplateWorkBookIO
                     .readTemplateWorkBook(cptname);
-            // 获取需要传递给报表的参数名与参数值，格式如[{"name":para1name,"value":para1value},{"name":para2name,"value":para2value},......]  
+            // get the parameters should be passed to the report, e.g.[{"name":para1name,"value":para1value},{"name":para2name,"value":para2value},......]
             JSONArray parasArray = new JSONArray(args[1].toString());
-            // 需要判断是否是5秒内执行过的  
-            // 取出保存的resultworkbook;  
+            // retrieve the cached result workbook
             Object tempWObj = wMap.get(cptname + parasArray.toString());
             if (tempWObj != null) {
-                // 取出hashmap里面保存的TpObj;  
                 TpObj curTpObj = (TpObj) tempWObj;
 
                 if ((System.currentTimeMillis() - curTpObj.getExeTime()) < 8000) {
@@ -81,10 +77,9 @@ public class ReportCheck extends AbstractFunction {
                     wMap.remove(cptname + parasArray.toString());
                 }
             }
-            // 如果没有设置，需要生成  
+            // The result workbook needs to be recreated if no longer in the cache.
             if (rworkbook == null) {
                 JSONObject jo = new JSONObject();
-                // 定义报表执行时使用的paraMap,保存参数名与值  
                 java.util.Map parameterMap = new java.util.HashMap();
                 if (parasArray.length() > 0) {
                     for (int i = 0; i < parasArray.length(); i++) {
@@ -92,13 +87,13 @@ public class ReportCheck extends AbstractFunction {
                         parameterMap.put(jo.get("name"), jo.get("value"));
                     }
                 }
-                // 执行报表  
+                // execute the template
                 rworkbook = workbook.execute(parameterMap, new WriteActor());
-                // 保存下来  
+                // save it to cache
                 wMap.put(cptname + parasArray.toString(), new TpObj(rworkbook,
                         System.currentTimeMillis()));
             }
-            // 获取报表结果中对应Cell的值  
+            // get the value of the cell from the result workbook
             ResultReport report = rworkbook.getResultReport(0);
             CellElement cellElement = ((WB) report).getCellElement(colnumber, rownumber);
             returnValue = cellElement.getValue().toString();
