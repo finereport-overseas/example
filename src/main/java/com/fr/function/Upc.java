@@ -1,4 +1,3 @@
-// 自定义函数生成UPC条形码 
 package com.fr.function;
 
 import com.fr.script.AbstractFunction;
@@ -10,22 +9,22 @@ import java.awt.image.BufferedImage;
 
 public class Upc extends AbstractFunction {
     public Object run(Object[] args) {
-        if (args == null || args.length < 1) {
-            return "参数不对，必须有一个参数";
+        if (args == null || args.length < 2) {
+            return "The number of arguments should be 2.";
         }
         try {
-            // 创建一个UPC编码生成器
+            // create a UPC generator
             UPCABean bean = new UPCABean();
-            // 设置条形码高度，BufferedImage.TYPE_BYTE_BINARY代表常量值12，可直接使用常量值
+            // set the height of barcode
             final int dpi = Integer.parseInt(args[1].toString());
             bean.setModuleWidth(UnitConv.in2mm(1.0f / dpi));
             bean.doQuietZone(false);
             BitmapCanvasProvider canvas = new BitmapCanvasProvider(dpi,
                     BufferedImage.TYPE_BYTE_BINARY, false, 0);
-            // 创建条形码
+            // generate the barcode
             bean.generateBarcode(canvas, String.valueOf(args[0]));
             canvas.finish();
-            // 返回图片显示
+            // return the image
             return canvas.getBufferedImage();
         } catch (Exception e) {
             e.printStackTrace();
