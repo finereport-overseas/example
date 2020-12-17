@@ -5,10 +5,11 @@ import com.fr.script.AbstractFunction;
 
 public class CellSum extends AbstractFunction {
     public Object run(Object[] args) {
+        // invoke the embedded sum method
         String sum = Utils.objectToNumber(new SUM().run(args), false)
-                .toString(); // 直接调用FR内部的SUM方法
-        String result = "所在单元格为：" + this.getCalculator().getCurrentColumnRow()
-                + "；总和为：" + sum; // 获取当前单元格拼出最终结果
+                .toString();
+        String result = "The cell is: " + this.getCalculator().getCurrentColumnRow()
+                + ". Sum is: " + sum;
         return result;
     }
 }
