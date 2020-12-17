@@ -1,4 +1,3 @@
-// 引入JFreeChart图表 
 package com.fr.function;
 
 import java.awt.Color;
